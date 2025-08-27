@@ -32,33 +32,31 @@ function TempHeader({ setModalLogOut}) {
     const bottomHeaderRef = useRef(null);
     const [bottomHeaderHeight, setBottomHeaderHeight] = useState(0);
 
-    useLayoutEffect(() => {
-        const measure = () => {
-            if (bottomHeaderRef.current) {
-                setBottomHeaderHeight(bottomHeaderRef.current.offsetHeight || 0);
-            }
-        };
-        measure();
-        window.addEventListener('resize', measure, { passive: true });
-        return () => window.removeEventListener('resize', measure);
-    }, []);
+    // useLayoutEffect(() => {
+    //     const measure = () => {
+    //         if (bottomHeaderRef.current) {
+    //             setBottomHeaderHeight(bottomHeaderRef.current.offsetHeight || 0);
+    //         }
+    //     };
+    //     measure();
+    //     window.addEventListener('resize', measure, { passive: true });
+    //     return () => window.removeEventListener('resize', measure);
+    // }, []);
 
-    useEffect(() => {
-        function handleScroll() {
-            const currentY = window.scrollY || 0;
-            if (currentY > lastScrollY && currentY > 50) {
-                // scrolling down
-                setShowBottomHeader(false);
-            } else {
-                // scrolling up
-                setShowBottomHeader(true);
-            }
-            setLastScrollY(currentY);
-        }
+    // useEffect(() => {
+    //     function handleScroll() {
+    //         const currentY = window.scrollY || 0;
+    //         if (currentY > lastScrollY && currentY > 50) {
+    //             setShowBottomHeader(false);
+    //         } else {
+    //             setShowBottomHeader(true);
+    //         }
+    //         setLastScrollY(currentY);
+    //     }
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY]);
+    //     window.addEventListener('scroll', handleScroll, { passive: true });
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    // }, [lastScrollY]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -79,7 +77,7 @@ function TempHeader({ setModalLogOut}) {
     }, [shadowSearch]);    
 
     return (
-        <div className={`fixed top-0 w-full right-0 shadow-md !px-[62px] z-50 bg-white ${showBottomHeader ? '' : 'h-[75px]'}`}>
+        <div className={`fixed top-0 w-full right-0 shadow-md !px-[62px] z-50 bg-white `}>
             {/* هدر بالا */}
             <div className={`justify-between pt-4 flex items-center relative z-20 bg-white`}>
                 <div className='w-full flex items-center gap-[16px]'>
@@ -139,10 +137,10 @@ function TempHeader({ setModalLogOut}) {
             </div>
 
             {/* هدر پایین */}
-            <div className='relative'>
+            <div className=''>
                 <div
-                    ref={bottomHeaderRef}
-                    className={`bg-[#f2f2f2] rounded-lg flex justify-between items-center pl-4 transition-transform duration-300 ease-out relative z-10  ${showBottomHeader ? 'translate-y-0' : '-translate-y-full mt-[5px]'} ${location.pathname !== '/' ? 'bg-transparent' : 'bg-white'}`}
+                    // ref={bottomHeaderRef}
+                    className={` rounded-lg flex justify-between items-center pl-4 z-10  ${location.pathname !== '/' ? 'bg-transparent' : 'bg-white'}`}
                 >
                 <div className='flex gap-14 items-center'>
                     {MenuHeader.map((item, index) => (

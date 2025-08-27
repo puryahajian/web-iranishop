@@ -34,7 +34,7 @@ function MegaMenu() {
     const fullTree = data?.length > 0 ? buildTree(data) : [];
     // فقط ریشه‌هایی که order !== 0 هستن نگه داریم
     const tree = fullTree.filter(cat => cat.order !== 0);
-
+    // console.log(tree)
     // وقتی داده‌ها تغییر کرد، دسته اول را فعال کن
     useEffect(() => {
         if (tree?.length > 0 && !activeCategory) {
@@ -80,7 +80,7 @@ function MegaMenu() {
                 right: "0px",
                 boxShadow: "0px 16px 38px -13px rgb(204, 204, 204)",
                 }}
-                className="absolute left-0 top-full bg-white shadow-xl border-t"
+                className="absolute left-0 top-full bg-white shadow-xl"
             >
                 <div className="container mx-auto flex">
                 {/* لیست دسته‌های اصلی */}
@@ -101,7 +101,7 @@ function MegaMenu() {
                         }`}
                         onMouseEnter={() => setActiveCategory(cat)}
                     >
-                        {cat.name}
+                        {cat.om_name}
                     </div>
                     ))}
                 </div>
@@ -119,7 +119,7 @@ function MegaMenu() {
                                     className={`text-sm text-gray-500 py-2 cursor-pointer`}
                                     onClick={() => handleClick(child?.id)}
                                     >
-                                    {child?.name}
+                                    {child?.om_name}
                                 </Text>
                             </div>
                             ))

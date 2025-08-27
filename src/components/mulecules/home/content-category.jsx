@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function ContentCategory() {
     const {data} = useGetCategory();
-    // console.log(data)
+    console.log(data)
     const navigate = useNavigate();
 
     // const mainCategories = data?.filter(item => item?.parent === null || '' );
@@ -37,7 +37,7 @@ function ContentCategory() {
                         check={true}
                         image={item?.image}
                         boxFit="cover"
-                        text={item?.name}
+                        text={item?.om_name}
                         marginBottom="7px"
                     />
                 ))}

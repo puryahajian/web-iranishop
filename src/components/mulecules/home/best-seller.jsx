@@ -10,7 +10,7 @@ import toast from 'react-hot-toast'
 
 function BestSeller() {
     const {data} = useGetBestSeller();
-    // console.log(data)
+    console.log(data)
     const { cart, addToCart } = useCart();
     // console.log(cart)
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ function BestSeller() {
 
     const handleGetData = (item) => {
         addToCart(item)
-        toast.success('به سبد خرید اضافه شد');
+        toast.success('تمت الإضافة إلى سلة التسوق');
     }
 
     const scrollSlider = (direction) => {
@@ -62,7 +62,7 @@ function BestSeller() {
                                     borderCard="1px solid #aaa"
                                     borderRadiusCard="8px"
                                     backgroundColorCard="white"
-                                    product={item?.name}
+                                    product={item?.om_name}
                                     price={`${item?.price?.toLocaleString('fa-IR')} تومان`}
                                     style={{ color: "#222", fontWeight: "bold" }}
                                     styleOffer={{ fontSize: "13px" }}

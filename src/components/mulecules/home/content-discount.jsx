@@ -21,7 +21,7 @@ function ContentDiscount() {
     }
     const handleClick = (item) => {
         addToCart(item)
-        toast.success('به سبد خرید اضافه شد');
+        toast.success('تمت الإضافة إلى سلة التسوق');
     }
     
     const scrollSlider = (direction) => {
@@ -55,7 +55,7 @@ function ContentDiscount() {
                             imageCard={item?.image}
                             boxFitCard="contain"
                             width="180px"
-                            product={item?.name}
+                            product={item?.om_name}
                             price={`${item?.price?.toLocaleString('fa-IR')} ريال`}
                             priceOffer={`${item?.discounted_price?.toLocaleString('fa-IR')} ريال`}
                             style={{ fontSize: 16, color: "#333" }}

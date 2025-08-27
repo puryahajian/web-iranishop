@@ -24,7 +24,7 @@ function ContentList({ search }) {
 
     const handleGetData = (item) => {
         addToCart(item)
-        toast.success('به سبد خرید اضافه شد');
+        toast.success('تمت الإضافة إلى سلة التسوق');
     }
     return (
         <div className='mt-4 grid grid-cols-4 max-[1200px]:grid-cols-3 max-[860px]:grid-cols-2  gap-[18px] '>
@@ -39,7 +39,7 @@ function ContentList({ search }) {
                     borderRadiusImg="8px"
                     imageCard={item?.image}
                     boxFitCard="contain"
-                    product={item?.name}
+                    product={item?.om_name}
                     price={`${item?.price} ريال`}
                     priceOffer={`${item?.discounted_price} ريال`}
                     style={{ fontSize: 16, color: "#333" }}

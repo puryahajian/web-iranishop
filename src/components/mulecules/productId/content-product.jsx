@@ -20,7 +20,7 @@ function ContentProduct() {
 
     const handleClick = (data) => {
         addToCart(data)
-        toast.success('به سبد خرید اضافه شد');
+        toast.success('تمت الإضافة إلى سلة التسوق');
     }
 
     const getCartProductId = (item) => item.data?.data?.id ?? item.data?.id;
@@ -34,7 +34,7 @@ function ContentProduct() {
             <div className='flex gap-12'>
                 <img src={data?.data?.image} className='w-[424px] min-w-[424px] max-w-[424px] h-[464px] min-h-[464px] max-h-[464px] rounded-2xl object-cover' alt="" />
                 <div className='w-full'>
-                    <Text className={`font-bold text-lg`}>{data?.data?.name}</Text>
+                    <Text className={`font-bold text-lg`}>{data?.data?.om_name}</Text>
 
                     <Text className={`mt-4 h-[200px]`}>
                         {data?.data?.details}
@@ -43,22 +43,22 @@ function ContentProduct() {
                     <div className='flex mt-8 gap-10'>
                         <div>
                             <Text>
-                                ارتفاع : {data?.data?.height ? data?.data?.height : 'ندارد'}
+                                الارتفاع : {data?.data?.height ? data?.data?.height : 'لا يوج'}
                             </Text>
                         </div>
                         <div>
                             <Text>
-                                عرض : {data?.data?.width ? data?.data?.width : 'ندارد'}
+                                العرض : {data?.data?.width ? data?.data?.width : 'لا يوج'}
                             </Text>
                         </div>
                         <div>
                             <Text>
-                                طول : {data?.data?.length ? data?.data?.length : 'ندارد'}
+                                الطول : {data?.data?.length ? data?.data?.length : 'لا يوج'}
                             </Text>
                         </div>
                         <div>
                             <Text>
-                                وزن : {data?.data?.weight ? data?.data?.weight : 'ندارد'}
+                                الوزن : {data?.data?.weight ? data?.data?.weight : 'لا يوج'}
                             </Text>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ function ContentProduct() {
                                         {cartItem.quantity === 1 ? (
                                             <img onClick={() => {
                                                 removeFromCart(cartItem?.data?.data?.id)
-                                                toast.success('محصول از سبد خرید حذف شد')
+                                                toast.success('تم إزالة المنتج من سلة التسوق');
                                             }} src={Delete} alt="حذف" className="w-6 h-6" />
                                         ) : (
                                             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
@@ -94,7 +94,7 @@ function ContentProduct() {
                                             </svg>
                                         )}   
                                     </Button>
-                                    <Text className='px-2'>{cartItem.quantity}</Text>
+                                    <Text className='px-2 w-5'>{cartItem.quantity}</Text>
                                     <Button 
                                         onClick={() =>  updateQuantity(cartItem.data.id, cartItem.quantity + 1)}
                                         className="p-3 px-[18px] rounded-lg"
@@ -105,7 +105,7 @@ function ContentProduct() {
                             ) : (
                                 <Button onClick={() => handleClick(data)} className={`flex py-3 px-[22px] gap-4`}>
                                     <img src={IconCardShopProduct} alt="" />
-                                    <Text className={`text-white`}>افزودن</Text>
+                                    <Text className={`text-white`}>إضافة</Text>
                                 </Button>
                             )}
                     </div>
