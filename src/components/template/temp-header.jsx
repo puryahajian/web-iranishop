@@ -64,7 +64,7 @@ function TempHeader({ setModalLogOut}) {
                             <input
                             onClick={() => setShowSearch(true)}
                             type="text"
-                            placeholder="البحث في المنتجات..."
+                            placeholder="جستجو در محصولات..."
                             className="w-full rounded-lg border border-Gray1 bg-white py-[9px] pl-10 pr-4 text-sm outline-none"
                             />
                             
@@ -103,7 +103,7 @@ function TempHeader({ setModalLogOut}) {
                 </div>
                 
             </div>
-            <div className='bg-[#f2f2f2] mt-4 rounded-lg flex justify-between items-center pl-4'>
+            <div className='bg-[#f2f2f2] mt-4 rounded-lg flex justify-between items-center px-4'>
                 <div className='flex gap-14 items-center'>
                     {MenuHeader.map((item, index) => (
                         item.mega ? (
@@ -134,8 +134,8 @@ function TempHeader({ setModalLogOut}) {
                             buttonMenu={
                                 <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className={`w-10 h-10 rounded-lg border border-BorderBlue`} alt="" srcset="" />
                             }
-                            text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
-                            buttonTop='وتعديل المعلومات'
+                            text={`${dataProfile?.name === undefined ? 'نامشخص' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            buttonTop='ویرایش اطلاعات'
                             buttonbottom='خروج'
                             onClickEdit={() => navigate('/profile')}
                             onClickExit={() => console.log(setModalLogOut(true)) }
@@ -145,7 +145,7 @@ function TempHeader({ setModalLogOut}) {
                             onClick={() => navigate('/login')}
                             src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
                             className={`flex items-center gap-4 font-bold cursor-pointer`}
-                            text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            text={`${dataProfile?.name === undefined ? 'ناشناس' : dataProfile?.name} ${dataProfile?.family === undefined ? '' : dataProfile?.family}`}
                         />
                     )}
 

@@ -44,7 +44,7 @@ function ContentSearch({ setSearch }) {
                 setSearchInput(e.target.value)
                 setSearch(search);
             }}
-            placeholder="بحث المنتج"
+            placeholder="جستجو در محصولات"
             classIcon={`hidden`}
             className={`pr-2 w-full bg-transparent border-none placeholder:text-gray-400`}
           />

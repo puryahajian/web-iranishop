@@ -8,7 +8,7 @@ import TempBoxWhite from '../../template/temp-box-white'
 function MulCart() {
     return (
         <div>
-            <TempBoxMain>
+            <TempBoxMain className={`mt-[140px]`}>
                 <TempHeader/>
                 <TempBoxWhite>
                     <ContentCart/>

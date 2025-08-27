@@ -10,7 +10,7 @@ function MulAboutUs() {
     
     return (
         <div>
-            <TempBoxMain>
+            <TempBoxMain className={`mt-[140px]`}>
                 <TempHeader/>
                 <TempBoxWhite>
                     <div className='flex gap-12'>

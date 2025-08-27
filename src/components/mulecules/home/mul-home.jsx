@@ -23,7 +23,7 @@ function MulHome({setModalLogOut}) {
         <div>
             <TempHeader setModalLogOut={setModalLogOut} />   
 
-            <TempBoxMain className={`mt-0`}>
+            <TempBoxMain className={`mt-[180px]`}>
                 <StoryCarousel/>
             </TempBoxMain>
 

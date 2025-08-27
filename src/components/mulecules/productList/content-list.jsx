@@ -40,8 +40,8 @@ function ContentList({ search }) {
                     imageCard={item?.image}
                     boxFitCard="contain"
                     product={item?.name}
-                    price={`${item?.price} ريال`}
-                    priceOffer={`${item?.discounted_price} ريال`}
+                    price={`${item?.price} تومان`}
+                    priceOffer={`${item?.discounted_price} تومان`}
                     style={{ fontSize: 16, color: "#333" }}
                     stylePrice={{ fontWeight: "bold", color: "black" }}
                     styleOffer={{ fontSize: 14 }}

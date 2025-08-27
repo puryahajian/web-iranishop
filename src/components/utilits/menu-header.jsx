@@ -3,8 +3,8 @@ import MegaMenu from '../../lib/mega-menu'
 
 const MenuHeader = [
     {mega: true}, 
-    {link: '/', label: 'بیت'},
-    {link: '/about-us', label: 'معلومات عنا'},
+    {link: '/', label: 'خانه'},
+    {link: '/about-us', label: 'درباره ما'},
 ]
 
 export default MenuHeader

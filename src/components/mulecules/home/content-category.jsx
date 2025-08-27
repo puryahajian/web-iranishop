@@ -21,7 +21,7 @@ function ContentCategory() {
         <div className=''>
             <div className='flex items-center gap-2'>
                 <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-lg'/>
-                <Text className={`font-bold`}>التصنيفات</Text>
+                <Text className={`font-bold`}>دسته‌ها</Text>
             </div>
 
             {/* items category */}

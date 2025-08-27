@@ -22,19 +22,19 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      document.body.style.backgroundColor = "white"; 
+      document.body.style.backgroundColor = "white";
       if (location.pathname === "/login") {
-        document.body.style.backgroundColor = "white";  
+        document.body.style.backgroundColor = "white";
       }
     } else {
-      document.body.style.backgroundColor = "#E6E6E6"; // وردي فاتح أو أي لون آخر
+      document.body.style.backgroundColor = "#E6E6E6"; // صورتی روشن یا هر رنگ دیگر
     }
 
     return () => {
       document.body.style.backgroundColor = "";
     };
   }, [location.pathname]);
-  
+
   const handleSuccess = () => {
     Cookies.remove('access');
     Cookies.remove('refresh');
@@ -44,32 +44,32 @@ function App() {
   return (
     <div className="App">
       <CartProvider>
-      <Routes>
-        <Route path='/' element={<Home setModalLogOut={setModalLogOut}/>}/>
-        <Route path='/product-detail/:id' element={<ProductId/>}/>
-        <Route path='/product-list/:id' element={<ProductList/>}/>
-        <Route path='/cart' element={<Cart/>}/>
-        <Route path='/profile' element={<Profile/>}/>
-        <Route path='/about-us' element={<AboutUs/>}/>
-        <Route path='/search' element={<Search/>}/>
-        <Route path='/login' element={<Login/>}/>
-      </Routes>
+        <Routes>
+          <Route path='/' element={<Home setModalLogOut={setModalLogOut} />} />
+          <Route path='/product-detail/:id' element={<ProductId />} />
+          <Route path='/product-list/:id' element={<ProductList />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/about-us' element={<AboutUs />} />
+          <Route path='/search' element={<Search />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
 
-      {/* modal logout */}
-      <ModalGeneral
-        close={() => setModalLogOut(false)}
-        isOpen={modalLogOut}
-        handleClose={() => setModalLogOut(false)}
-        onSuccess={handleSuccess}
-        Title="هل تريد الخروج؟"  
-        textAccept="خروج"
-        classBtns={`grid grid-cols-2 gap-2`}
+        {/* modal logout */}
+        <ModalGeneral
+          close={() => setModalLogOut(false)}
+          isOpen={modalLogOut}
+          handleClose={() => setModalLogOut(false)}
+          onSuccess={handleSuccess}
+          Title="می‌خواهید خارج شوید؟"
+          textAccept="خروج"
+          classBtns={`grid grid-cols-2 gap-2`}
         >
-      </ModalGeneral>
-      
-      <ScrollToTop/>
+        </ModalGeneral>
+
+        <ScrollToTop />
       </CartProvider>
-      
+
     </div>
   );
 }
