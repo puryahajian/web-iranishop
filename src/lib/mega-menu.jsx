@@ -47,18 +47,18 @@ function MegaMenu() {
     };
     // console.log(tree)
 
-    if (isLoading) return <p>در حال بارگذاری</p>;
+    if (isLoading) return <p>جارٍ التحميل</p>;
 
     return (
         <div
-        className="relative bg-white"
+        className="relative"
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
         >
         {/* هدر */}
-        <div className="container flex items-center btn-megaMenu py-6 bg-[#f2f2f2]">
-            <button className="px-4 border-l border-Gray1 ">
-            <Text className={`text-gray-500`}>دسته‌بندی</Text>
+        <div className="container content-mega-menu flex items-center btn-megaMenu">
+            <button className="pl-4 border-l border-Gray1 bg-transparent">
+                <Text className={`text-gray-500`}>فئة</Text>
             </button>
         </div>
 
@@ -125,7 +125,7 @@ function MegaMenu() {
                             ))
                         ) : (
                             <p className="text-gray-400 col-span-2 text-sm">
-                            زیر دسته‌ای یافت نشد  
+                            لا توجد فئات فرعية  
                             </p>
                         )}
                         </div>

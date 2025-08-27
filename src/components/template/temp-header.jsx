@@ -12,6 +12,7 @@ import ModalGeneral from '../mulecules/modal-general'
 import ContentSearch from '../mulecules/seach/content-search'
 import ContentResponsSearch from '../mulecules/seach/content-respons-search'
 import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useRef } from 'react'
 import Cookies from "js-cookie";
 import DropDownMenu from '../mulecules/drop-down-menu'
@@ -26,6 +27,38 @@ function TempHeader({ setModalLogOut}) {
     const boxRef = useRef(null);
     const accessToken = Cookies.get('access');
     const location = useLocation();
+    const [showBottomHeader, setShowBottomHeader] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const bottomHeaderRef = useRef(null);
+    const [bottomHeaderHeight, setBottomHeaderHeight] = useState(0);
+
+    useLayoutEffect(() => {
+        const measure = () => {
+            if (bottomHeaderRef.current) {
+                setBottomHeaderHeight(bottomHeaderRef.current.offsetHeight || 0);
+            }
+        };
+        measure();
+        window.addEventListener('resize', measure, { passive: true });
+        return () => window.removeEventListener('resize', measure);
+    }, []);
+
+    useEffect(() => {
+        function handleScroll() {
+            const currentY = window.scrollY || 0;
+            if (currentY > lastScrollY && currentY > 50) {
+                // scrolling down
+                setShowBottomHeader(false);
+            } else {
+                // scrolling up
+                setShowBottomHeader(true);
+            }
+            setLastScrollY(currentY);
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -46,8 +79,9 @@ function TempHeader({ setModalLogOut}) {
     }, [shadowSearch]);    
 
     return (
-        <div className={`fixed top-0 pt-4 w-full right-0 !px-[62px] z-50 ${location.pathname !== '/' ? 'bg-Gray1' : 'bg-white'}`}>
-            <div className='justify-between flex items-center'>
+        <div className={`fixed top-0 w-full right-0 shadow-md !px-[62px] z-50 bg-white ${showBottomHeader ? '' : 'h-[75px]'}`}>
+            {/* هدر بالا */}
+            <div className={`justify-between pt-4 flex items-center relative z-20 bg-white`}>
                 <div className='w-full flex items-center gap-[16px]'>
                     <Link to='/'>
                         {/* <AvatarButtonHeader
@@ -64,8 +98,8 @@ function TempHeader({ setModalLogOut}) {
                             <input
                             onClick={() => setShowSearch(true)}
                             type="text"
-                            placeholder="جستجو در محصولات..."
-                            className="w-full rounded-lg border border-Gray1 bg-white py-[9px] pl-10 pr-4 text-sm outline-none"
+                            placeholder="البحث في المنتجات..."
+                            className={`w-full rounded-lg border border-Gray1 bg-white py-[9px] pl-10 pr-4 text-sm outline-none ${location.pathname !== '/' ? '!bg-transparent border border-gray-300' : 'bg-white'}`}
                             />
                             
                             {/* آیکون سرچ */}
@@ -103,7 +137,13 @@ function TempHeader({ setModalLogOut}) {
                 </div>
                 
             </div>
-            <div className='bg-[#f2f2f2] mt-4 rounded-lg flex justify-between items-center px-4'>
+
+            {/* هدر پایین */}
+            <div className='relative'>
+                <div
+                    ref={bottomHeaderRef}
+                    className={`bg-[#f2f2f2] rounded-lg flex justify-between items-center pl-4 transition-transform duration-300 ease-out relative z-10  ${showBottomHeader ? 'translate-y-0' : '-translate-y-full mt-[5px]'} ${location.pathname !== '/' ? 'bg-transparent' : 'bg-white'}`}
+                >
                 <div className='flex gap-14 items-center'>
                     {MenuHeader.map((item, index) => (
                         item.mega ? (
@@ -122,8 +162,6 @@ function TempHeader({ setModalLogOut}) {
                             className="flex items-center rounded-[8px] font-bold !bg-Gray1"
                             classImg="p-[10px] border-transparent"
                         />
-
-                        {/* عدد بالای سمت راست */}
                         <span className={`absolute -top-1 flex justify-center items-center -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full transition-all ease-in-out ${cart?.length === 0 ? 'hidden' : ''}`}>
                             {cart?.length}
                         </span>
@@ -134,8 +172,8 @@ function TempHeader({ setModalLogOut}) {
                             buttonMenu={
                                 <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className={`w-10 h-10 rounded-lg border border-BorderBlue`} alt="" srcset="" />
                             }
-                            text={`${dataProfile?.name === undefined ? 'نامشخص' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
-                            buttonTop='ویرایش اطلاعات'
+                            text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            buttonTop='وتعديل المعلومات'
                             buttonbottom='خروج'
                             onClickEdit={() => navigate('/profile')}
                             onClickExit={() => console.log(setModalLogOut(true)) }
@@ -145,11 +183,12 @@ function TempHeader({ setModalLogOut}) {
                             onClick={() => navigate('/login')}
                             src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
                             className={`flex items-center gap-4 font-bold cursor-pointer`}
-                            text={`${dataProfile?.name === undefined ? 'ناشناس' : dataProfile?.name} ${dataProfile?.family === undefined ? '' : dataProfile?.family}`}
+                            text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
                         />
                     )}
 
                 </div>
+            </div>
             </div>
             
         </div>

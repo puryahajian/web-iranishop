@@ -12,22 +12,22 @@ function MulProductList() {
 
     return (
         <div>
-            <TempBoxMain className={`mt-[180px]`}>
+            <TempBoxMain>
                 <TempHeader/>
-                    <div className='grid grid-cols-4 mt-10 gap-6'>
+                    <div className='grid grid-cols-4 gap-6'>
                         <div>
-                            <TempBoxWhite>
-                                <Input placeholder={'جستجو'} value={search} onChange={e => setSearch(e.target.value)} />
+                            <TempBoxWhite className={`!mt-0`}>
+                                <Input placeholder={'بحث'} value={search} onChange={e => setSearch(e.target.value)} />
                             </TempBoxWhite>
 
                             <TempBoxWhite>
                                 <div className='flex items-center justify-center'>
-                                    <Text>به‌زودی!</Text>
+                                    <Text>قريباً !</Text>
                                 </div>
                             </TempBoxWhite>
                         </div>
                         <div className='col-span-3'>
-                            <TempBoxWhite>
+                            <TempBoxWhite className={`!mt-0`}>
                                 <ContentProductList search={search}/>
                             </TempBoxWhite>
                         </div>

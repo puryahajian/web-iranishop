@@ -25,11 +25,11 @@ function ContentSupport() {
         <div className='mt-[72px] grid grid-cols-5 max-[1200px]:grid-cols-2 gap-4'>
             <div style={styleBox}>
                 <img src={Box} style={style} alt="" srcset="" />
-                <Text>توصیل سریع</Text>
+                <Text>إمكانية التوصيل السريع</Text>
             </div>
             <div style={styleBox}>
                 <img src={Pay} style={style} alt="" srcset="" />
-                <Text>دفع در کنار</Text>
+                <Text>إمكانية الدفع عند الاستلام</Text>
             </div>
             <div style={styleBox}>
                 <img src={Talking} style={style} alt="" srcset="" />
@@ -37,11 +37,11 @@ function ContentSupport() {
             </div>
             <div style={styleBox}>
                 <img src={Take} style={style} alt="" srcset="" />
-                <Text>۷ روز ضمانت بازگشت محصول</Text> 
+                <Text>سبعة أيام ضمان لاسترجاع المنتج</Text>
             </div>
             <div style={styleBox}>
                 <img src={Certi} style={style} alt="" srcset="" />
-                <Text>ضمانت صحت محصول</Text>
+                <Text>ضمان أصالة المنتج</Text>
             </div>
 
         </div>

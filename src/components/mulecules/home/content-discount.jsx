@@ -37,14 +37,14 @@ function ContentDiscount() {
         <div className='my-[72px] bg-BorderBlue rounded-lg p-6'>
             <div className='flex items-center gap-2 mb-10'>
                 <div className='border-2 border-white bg-white w-6 h-2 rounded-sm'/>
-                <Text className={`font-bold text-white text-lg`}>محصولات تخفیف‌ دار</Text>
+                <Text className={`font-bold text-white text-lg`}>المنتجات المخفضة</Text>
             </div>
             <div className='relative'>
                 <button onClick={() => scrollSlider('left')} className='absolute z-10 left-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 opacity-80 hover:opacity-100 transition'>
                     <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
                 <div ref={sliderRef} className='flex scroll-slider gap-[18px] overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 pb-2 scroll-smooth'>
-                    {data?.results?.map((item) => (
+                    {data?.results?.slice(-20)?.map((item) => (
                         <CardShopProduct
                             key={item?.id}
                             onTapCard={() => handleCardClick(item?.id)}
@@ -56,8 +56,8 @@ function ContentDiscount() {
                             boxFitCard="contain"
                             width="180px"
                             product={item?.name}
-                            price={`${item?.price?.toLocaleString('fa-IR')} تومان`}
-                            priceOffer={`${item?.discounted_price?.toLocaleString('fa-IR')} تومان`}
+                            price={`${item?.price?.toLocaleString('fa-IR')} ريال`}
+                            priceOffer={`${item?.discounted_price?.toLocaleString('fa-IR')} ريال`}
                             style={{ fontSize: 16, color: "#333" }}
                             stylePrice={{ fontWeight: "bold", color: "green" }}
                             styleOffer={{ fontSize: 14, display: item?.discounted_price === 0 ? "none" : "block" }}

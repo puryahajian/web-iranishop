@@ -44,16 +44,16 @@ function BestSeller() {
         <div className='mt-[72px]'>
             <div className='flex items-center gap-2 mb-10'>
                 <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                <Text className={`font-bold`}>برترین محصولات</Text>
+                <Text className={`font-bold`}>الأكثر مبيعاً</Text>
             </div>
             <div className='relative'>
                 <button onClick={() => scrollSlider('left')} className='absolute z-10 left-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 opacity-80 hover:opacity-100 transition'>
                     <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
                 <div ref={sliderRef} className='flex gap-[18px] overflow-x-auto scroll-slider scrollbar-thin scrollbar-thumb-gray-300 pb-2 scroll-smooth'>
-                    {grouped.map((pair, idx) => (
+                    {grouped?.slice(-9)?.map((pair, idx) => (
                         <div key={idx} className='flex flex-col gap-4 min-w-[290px]'>
-                            {pair.map((item) => (
+                            {pair?.map((item) => (
                                 <CardShopProductWallet
                                     key={item?.id}
                                     onClickCard={() => handleCardClick(item?.id)}

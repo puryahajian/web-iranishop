@@ -17,12 +17,12 @@ function MulProfile() {
     const [addressMapp, setAddressMapp] = useState("");
     return (
         <div>
-            <TempBoxMain className={`mt-[140px]`}>
+            <TempBoxMain>
                 <TempHeader/>
                 <TempBoxWhite>
                     <div className='flex items-center gap-2'>
                         <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                        <Text className={`font-bold !text-base`}>پروفایل</Text>
+                        <Text className={`font-bold !text-base`}>الملف الشخصي</Text>
                     </div>
                     <div className='grid grid-cols-2 mt-6'>
                         <ContentForm addressMapp={addressMapp}/>
@@ -30,23 +30,23 @@ function MulProfile() {
                     </div>
                 </TempBoxWhite>
 
-                {/* سفارش‌ها */}
+                {/* الطلبات */}
                 <TempBoxWhite className='mt-4'>
                     <div className='flex items-center gap-2 mb-4'>
                         <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                        <Text className='font-bold !text-base'>سفارش‌ها</Text>
+                        <Text className='font-bold !text-base'>الطلبات</Text>
                     </div>
                     <div className='overflow-x-auto'>
                         <table className='min-w-full text-center border-separate border-spacing-y-3'>
                             <thead>
                                 <tr className='text-gray-500 text-sm '>
-                                    <th>عدد</th>
-                                    <th>سفارش</th>
-                                    <th>کد سفارش</th>
-                                    <th>قیمت</th>
+                                    <th>الرقم</th>
+                                    <th>الطلب</th>
+                                    <th>رمز الطلب</th>
+                                    <th>السعر</th>
                                     {/* <th>سفارش دهنده</th> */}
-                                    <th>تاریخ و زمان</th>
-                                    <th>وضعیت سفارش</th>
+                                    <th>التاريخ والوقت</th>
+                                    <th>حالة الطلب</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,7 +55,7 @@ function MulProfile() {
                                         <td className='ns'>{index + 1}</td>
                                         <td>{item?.items?.map((n) => n?.product?.name)}</td>
                                         <td>{item?.order_code}</td>
-                                        <td>{item?.final_price !== undefined ? Math.floor(item.final_price).toLocaleString('fa-IR') : ''} ریال</td>
+                                        <td>{item?.final_price !== undefined ? Math.floor(item.final_price).toLocaleString('fa-IR') : ''} ريال</td>
                                         {/* <td>علی حاجیان</td> */}
                                         <td>
                                             {item?.created_at ? (
@@ -64,7 +64,7 @@ function MulProfile() {
                                                 </>
                                             ) : ''}
                                         </td>
-                                        <td className='text-red-600 font-bold ne'>{item?.state === 8 && 'ارسال شد'}</td>
+                                        <td className='text-red-600 font-bold ne'>{item?.state === 8 && 'تم الإرسال'}</td>
                                     </tr>
                                 ))}
                             </tbody>

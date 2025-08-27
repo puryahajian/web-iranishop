@@ -52,7 +52,7 @@ function ContentForm({ addressMapp }) {
             },
             {
                 onSuccess: () => {
-                    toast.success('پروفایل با موفقیت به‌روزرسانی شد')
+                    toast.success('تم تحديث الملف الشخصي')
                 }
             }
         );
@@ -65,12 +65,12 @@ function ContentForm({ addressMapp }) {
                     <div>
                         <div className='flex items-center gap-2'>
                             <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                            <Text className={``}>نام</Text>
+                            <Text className={``}>الاسم </Text>
                         </div>
                         <Input
                             classIcon={`hidden`}
                             className={`bg-transparent pr-5 placeholder:text-sm mt-[10px]`}
-                            placeholder={`نام`}
+                            placeholder={`الاسم `}
                             name="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -79,12 +79,12 @@ function ContentForm({ addressMapp }) {
                     <div>
                         <div className='flex items-center gap-2'>
                             <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                            <Text className={``}>نام خانوادگی</Text>
+                            <Text className={``}>اسم العائلة</Text>
                         </div>
                         <Input
                             classIcon={`hidden`}
                             className={`bg-transparent pr-5 placeholder:text-sm mt-[10px]`}
-                            placeholder={`نام خانوادگی`}
+                            placeholder={`اسم العائلة`}
                             name="family"
                             value={family}
                             onChange={(e) => setFamily(e.target.value)}
@@ -94,12 +94,12 @@ function ContentForm({ addressMapp }) {
 
                 <div className='flex items-center gap-2 mt-4'>
                     <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                    <Text className={``}>شماره موبایل</Text>
+                    <Text className={``}>رقم الجوال</Text>
                 </div>
                 <Input
                     classIcon={`hidden`}
                     className={`bg-transparent pr-5 placeholder:text-sm mt-[10px]`}
-                    placeholder={`شماره موبایل`}
+                    placeholder={`رقم الجوال`}
                     name="phone"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -107,12 +107,12 @@ function ContentForm({ addressMapp }) {
 
                 <div className='flex items-center gap-2 mt-4'>
                     <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                    <Text className={``}>آدرس</Text>
+                    <Text className={``}>العنوان</Text>
                 </div>
                 <Input
                     classIcon={`hidden`}
                     className={`bg-transparent pr-5 placeholder:text-sm mt-[10px]`}
-                    placeholder={`آدرس`}
+                    placeholder={`العنوان`}
                     name="address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
@@ -122,7 +122,7 @@ function ContentForm({ addressMapp }) {
                     e.preventDefault();
                     handleSubmit()
                 }} className={`mt-10 w-full py-4`}>
-                    {isPending ? <Loading/> : 'بروزرسانی پروفایل'}
+                    {isPending ? <Loading/> : 'تحديث العنوان'}
                 </Button>
             </form>
         </div>

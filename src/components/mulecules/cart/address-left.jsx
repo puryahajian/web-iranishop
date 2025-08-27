@@ -48,18 +48,18 @@ function AddressLeft() {
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-2'>
                         <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                        <Text className={`font-bold`}>آدرس شما</Text>
+                        <Text className={`font-bold`}>عنوانك</Text>
                     </div>
 
                     <div className='flex gap-2 items-center cursor-pointer' onClick={() => navigate('/profile')}>
-                        <Text className={`text-red-500`}>ویرایش</Text>
+                        <Text className={`text-red-500`}>تعديل</Text>
                         <img src={Edit} alt="" />
                     </div>
                 </div>
 
                 <div className='flex items-center gap-2 mt-[9px]'>
                     <img src={Location} alt="" />
-                    <Text className={`text-BorderGray`}>{data?.address === "" ? 'لطفاً آدرس را وارد کنید' : data?.address}</Text>
+                    <Text className={`text-BorderGray`}>{data?.address === "" ? 'من فضلك أدخل العنوان' : data?.address}</Text>
                 </div>
 
                 <hr className='border border-Gray1 my-6 w-[93%] m-auto'/>
@@ -71,13 +71,13 @@ function AddressLeft() {
             {/* discount */}
             <div className='flex items-center gap-2'>
                 <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                <Text className={`font-bold`}>کد تخفیف</Text>
+                <Text className={`font-bold`}>رمز الخصم</Text>
             </div>
 
             <div className='flex items-center gap-4 mt-2'>
                 <Input 
                     classIcon={`hidden`} 
-                    placeholder={`کد تخفیف را وارد کنید`} 
+                    placeholder={`أدخل رمز الخصم`} 
                     className={`bg-transparent w-full pr-2`}
                     value={code} 
                     onChange={(e) => setCode(e.target.value.toUpperCase())}
@@ -87,43 +87,43 @@ function AddressLeft() {
                     onClick={handleApplyDiscount}
                     className={`px-10 py-3`}
                 >
-                    اعمال
+                    يتقدم
                 </Button>
             </div>
             {discountError && <Text className="text-red-500 mt-1">{discountError}</Text>}
 
             {/* فاکتور قیمت‌ها */}
             <div className='flex justify-between items-center mt-6'>
-                <Text>جمع کل: </Text>
+                <Text>إجمالي السعر : </Text>
                 <Text>{total.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
             <div className='flex justify-between items-center mt-3'>
-                <Text>مالیات بر ارزش افزوده: </Text>
+                <Text>ضريبة القيمة المضافة : </Text>
                 <Text>{tax.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
             {discountAmount > 0 && (
                 <div className='flex justify-between items-center mt-3 text-green-600'>
-                    <Text>تخفیف: </Text>
+                    <Text>الخصم : </Text>
                     <Text>-{discountAmount.toLocaleString('fa-IR')} تومان</Text>
                 </div>
             )}
 
             <hr className='border border-Gray1 my-4 w-[93%] m-auto'/>
 
-            <div className='flex justify بین items-center mt-3 font-bold text-lg'>
-                <Text>مبلغ نهایی: </Text>
+            <div className='flex justify-between items-center mt-3 font-bold text-lg'>
+                <Text>السعر الإجمالي : </Text>
                 <Text>{finalTotal.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
 
             <Button onClick={() => {
                 if (!access) {
-                    toast.error('لطفاً وارد شوید');
+                    toast.error('لطفا لاگین کنید');
                 }
                 }} className={`w-full mt-[40px] py-4 ${!access ? 'bg-gray-400 cursor-not-allowed' : ''}`}>
-                ثبت سفارش
+                عرض الطلب
             </Button>
         </div>
     )

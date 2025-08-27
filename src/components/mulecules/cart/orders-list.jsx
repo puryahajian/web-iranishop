@@ -16,7 +16,7 @@ function OrdersList() {
         <div className=' pl-6'>
             <div className='flex items-center gap-2 mb-4'>
                 <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                <Text className={`font-bold`}>لیست سفارش‌ها</Text>
+                <Text className={`font-bold`}>قائمة الطلبات</Text>
             </div>
 
             <div className='grid gap-4'>
@@ -52,7 +52,7 @@ function OrdersList() {
                 {cart?.length === 0 ? (
                     <>
                         <img src={NotData} className='w-32 m-auto mb-6' alt="" srcset="" />
-                        <Text>سبد خرید شما خالی است</Text>
+                        <Text>سلة التسوق الخاصة بك فارغة</Text>
                     </>
                 ) : (
                     ''

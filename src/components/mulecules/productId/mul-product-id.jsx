@@ -10,7 +10,7 @@ function MulProductId() {
     
     return (
         <div>
-            <TempBoxMain className={`mt-[180px]`}>
+            <TempBoxMain>
                 <TempHeader/>
                 <ContentProduct/>
                 <TempFooter/>
