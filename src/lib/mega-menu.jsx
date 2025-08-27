@@ -47,7 +47,7 @@ function MegaMenu() {
     };
     // console.log(tree)
 
-    if (isLoading) return <p>جارٍ التحميل</p>;
+    if (isLoading) return <p>در حال بارگذاری...</p>;
 
     return (
         <div

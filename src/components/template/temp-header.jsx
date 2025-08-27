@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import AvatarButtonHeader from '../mulecules/avatar-button-header'
 import MenuHeader from '../utilits/menu-header'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -11,6 +11,9 @@ import { useCart } from '../../context/CartContext'
 import ModalGeneral from '../mulecules/modal-general'
 import ContentSearch from '../mulecules/seach/content-search'
 import ContentResponsSearch from '../mulecules/seach/content-respons-search'
+import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
+import { useRef } from 'react'
 import Cookies from "js-cookie";
 import DropDownMenu from '../mulecules/drop-down-menu'
 
@@ -29,31 +32,31 @@ function TempHeader({ setModalLogOut}) {
     const bottomHeaderRef = useRef(null);
     const [bottomHeaderHeight, setBottomHeaderHeight] = useState(0);
 
-    useLayoutEffect(() => {
-        const measure = () => {
-            if (bottomHeaderRef.current) {
-                setBottomHeaderHeight(bottomHeaderRef.current.offsetHeight || 0);
-            }
-        };
-        measure();
-        window.addEventListener('resize', measure, { passive: true });
-        return () => window.removeEventListener('resize', measure);
-    }, []);
+    // useLayoutEffect(() => {
+    //     const measure = () => {
+    //         if (bottomHeaderRef.current) {
+    //             setBottomHeaderHeight(bottomHeaderRef.current.offsetHeight || 0);
+    //         }
+    //     };
+    //     measure();
+    //     window.addEventListener('resize', measure, { passive: true });
+    //     return () => window.removeEventListener('resize', measure);
+    // }, []);
 
-    useEffect(() => {
-        function handleScroll() {
-            const currentY = window.scrollY || 0;
-            if (currentY > lastScrollY && currentY > 50) {
-                setShowBottomHeader(false); // اسکرول به پایین
-            } else {
-                setShowBottomHeader(true); // اسکرول به بالا
-            }
-            setLastScrollY(currentY);
-        }
+    // useEffect(() => {
+    //     function handleScroll() {
+    //         const currentY = window.scrollY || 0;
+    //         if (currentY > lastScrollY && currentY > 50) {
+    //             setShowBottomHeader(false);
+    //         } else {
+    //             setShowBottomHeader(true);
+    //         }
+    //         setLastScrollY(currentY);
+    //     }
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY]);
+    //     window.addEventListener('scroll', handleScroll, { passive: true });
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    // }, [lastScrollY]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -74,11 +77,16 @@ function TempHeader({ setModalLogOut}) {
     }, [shadowSearch]);    
 
     return (
-        <div className={`fixed top-0 w-full right-0 shadow-md !px-[62px] z-50 bg-white ${showBottomHeader ? '' : 'h-[75px]'}`}>
+        <div className={`fixed top-0 w-full right-0 shadow-md !px-[62px] z-50 bg-white `}>
             {/* هدر بالا */}
             <div className={`justify-between pt-4 flex items-center relative z-20 bg-white`}>
                 <div className='w-full flex items-center gap-[16px]'>
                     <Link to='/'>
+                        {/* <AvatarButtonHeader
+                            src={data?.results[0]?.logo}
+                            className={`flex items-center gap-4 font-bold`}
+                            text={data?.results[0]?.name}
+                        /> */}
                         <img src={data?.results[0]?.logo} className='w-[195px] h-[40px] rounded-lg object-cover'/>
                     </Link>
 
@@ -129,10 +137,10 @@ function TempHeader({ setModalLogOut}) {
             </div>
 
             {/* هدر پایین */}
-            <div className='relative'>
+            <div className=''>
                 <div
-                    ref={bottomHeaderRef}
-                    className={`bg-[#f2f2f2] rounded-lg flex justify-between items-center pl-4 transition-transform duration-300 ease-out relative z-10  ${showBottomHeader ? 'translate-y-0' : '-translate-y-full mt-[5px]'} ${location.pathname !== '/' ? 'bg-transparent' : 'bg-white'}`}
+                    // ref={bottomHeaderRef}
+                    className={` rounded-lg flex justify-between items-center pl-4 z-10  ${location.pathname !== '/' ? 'bg-transparent' : 'bg-white'}`}
                 >
                 <div className='flex gap-14 items-center'>
                     {MenuHeader.map((item, index) => (
@@ -160,10 +168,10 @@ function TempHeader({ setModalLogOut}) {
                     {accessToken ? (
                         <DropDownMenu
                             buttonMenu={
-                                <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className={`w-10 h-10 rounded-lg border border-BorderBlue`} alt="" />
+                                <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className={`w-10 h-10 rounded-lg border border-BorderBlue`} alt="" srcset="" />
                             }
-                            text={`${dataProfile?.name === null ? 'نامشخص' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
-                            buttonTop='ویرایش اطلاعات'
+                            text={`${dataProfile?.name === null ? 'نامشخض' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            buttonTop="ویرایش اطلاعات"
                             buttonbottom='خروج'
                             onClickEdit={() => navigate('/profile')}
                             onClickExit={() => console.log(setModalLogOut(true)) }
@@ -173,7 +181,7 @@ function TempHeader({ setModalLogOut}) {
                             onClick={() => navigate('/login')}
                             src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
                             className={`flex items-center gap-4 font-bold cursor-pointer`}
-                            text={`${dataProfile?.name === null ? 'نامشخص' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            text={`${dataProfile?.name === null ? 'نامشخض' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
                         />
                     )}
 
