@@ -20,22 +20,20 @@ function AddressLeft() {
     const navigate = useNavigate();
 
     const total = cart.reduce((sum, item) => {
-        // بررسی داده‌ها: اول item.data.data بعد item.data
         const productData = item?.data?.data ?? item?.data;
         const price = productData?.discounted_price ?? productData?.price ?? 0;
         return sum + price * item.quantity;
     }, 0);
 
-    // 🟢 محاسبه قیمت نهایی بعد از تخفیف و مالیات
     const finalTotal = total + tax - discountAmount;
 
     const handleApplyDiscount = () => {
         if (!code) {
-            setDiscountAmount(0); // 🔹 وقتی کد خالی باشه، تخفیف صفر میشه
+            setDiscountAmount(0);
             return;
         }
 
-        const discountValue = applyDiscount(code); // اینجا مبلغ تخفیف برمی‌گرده
+        const discountValue = applyDiscount(code);
         setDiscountAmount(discountValue > 0 ? discountValue : 0);
     };
 
@@ -48,18 +46,18 @@ function AddressLeft() {
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-2'>
                         <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                        <Text className={`font-bold`}>عنوانك</Text>
+                        <Text className={`font-bold`}>آدرس شما</Text>
                     </div>
 
                     <div className='flex gap-2 items-center cursor-pointer' onClick={() => navigate('/profile')}>
-                        <Text className={`text-red-500`}>تعديل</Text>
+                        <Text className={`text-red-500`}>ویرایش</Text>
                         <img src={Edit} alt="" />
                     </div>
                 </div>
 
                 <div className='flex items-center gap-2 mt-[9px]'>
                     <img src={Location} alt="" />
-                    <Text className={`text-BorderGray`}>{data?.address === "" ? 'من فضلك أدخل العنوان' : data?.address}</Text>
+                    <Text className={`text-BorderGray`}>{data?.address === "" ? 'لطفاً آدرس خود را وارد کنید' : data?.address}</Text>
                 </div>
 
                 <hr className='border border-Gray1 my-6 w-[93%] m-auto'/>
@@ -71,13 +69,13 @@ function AddressLeft() {
             {/* discount */}
             <div className='flex items-center gap-2'>
                 <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                <Text className={`font-bold`}>رمز الخصم</Text>
+                <Text className={`font-bold`}>کد تخفیف</Text>
             </div>
 
             <div className='flex items-center gap-4 mt-2'>
                 <Input 
                     classIcon={`hidden`} 
-                    placeholder={`أدخل رمز الخصم`} 
+                    placeholder={`کد تخفیف را وارد کنید`} 
                     className={`bg-transparent w-full pr-2`}
                     value={code} 
                     onChange={(e) => setCode(e.target.value.toUpperCase())}
@@ -87,25 +85,25 @@ function AddressLeft() {
                     onClick={handleApplyDiscount}
                     className={`px-10 py-3`}
                 >
-                    يتقدم
+                    اعمال
                 </Button>
             </div>
             {discountError && <Text className="text-red-500 mt-1">{discountError}</Text>}
 
             {/* فاکتور قیمت‌ها */}
             <div className='flex justify-between items-center mt-6'>
-                <Text>إجمالي السعر : </Text>
+                <Text>مجموع قیمت : </Text>
                 <Text>{total.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
             <div className='flex justify-between items-center mt-3'>
-                <Text>ضريبة القيمة المضافة : </Text>
+                <Text>مالیات بر ارزش افزوده : </Text>
                 <Text>{tax.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
             {discountAmount > 0 && (
                 <div className='flex justify-between items-center mt-3 text-green-600'>
-                    <Text>الخصم : </Text>
+                    <Text>تخفیف : </Text>
                     <Text>-{discountAmount.toLocaleString('fa-IR')} تومان</Text>
                 </div>
             )}
@@ -113,17 +111,17 @@ function AddressLeft() {
             <hr className='border border-Gray1 my-4 w-[93%] m-auto'/>
 
             <div className='flex justify-between items-center mt-3 font-bold text-lg'>
-                <Text>السعر الإجمالي : </Text>
+                <Text>مبلغ نهایی : </Text>
                 <Text>{finalTotal.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
 
             <Button onClick={() => {
                 if (!access) {
-                    toast.error('لطفا لاگین کنید');
+                    toast.error('لطفاً وارد حساب کاربری شوید');
                 }
                 }} className={`w-full mt-[40px] py-4 ${!access ? 'bg-gray-400 cursor-not-allowed' : ''}`}>
-                عرض الطلب
+                ثبت سفارش
             </Button>
         </div>
     )

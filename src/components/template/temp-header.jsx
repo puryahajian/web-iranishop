@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import AvatarButtonHeader from '../mulecules/avatar-button-header'
 import MenuHeader from '../utilits/menu-header'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -11,9 +11,6 @@ import { useCart } from '../../context/CartContext'
 import ModalGeneral from '../mulecules/modal-general'
 import ContentSearch from '../mulecules/seach/content-search'
 import ContentResponsSearch from '../mulecules/seach/content-respons-search'
-import { useEffect } from 'react'
-import { useLayoutEffect } from 'react'
-import { useRef } from 'react'
 import Cookies from "js-cookie";
 import DropDownMenu from '../mulecules/drop-down-menu'
 
@@ -47,11 +44,9 @@ function TempHeader({ setModalLogOut}) {
         function handleScroll() {
             const currentY = window.scrollY || 0;
             if (currentY > lastScrollY && currentY > 50) {
-                // scrolling down
-                setShowBottomHeader(false);
+                setShowBottomHeader(false); // اسکرول به پایین
             } else {
-                // scrolling up
-                setShowBottomHeader(true);
+                setShowBottomHeader(true); // اسکرول به بالا
             }
             setLastScrollY(currentY);
         }
@@ -84,11 +79,6 @@ function TempHeader({ setModalLogOut}) {
             <div className={`justify-between pt-4 flex items-center relative z-20 bg-white`}>
                 <div className='w-full flex items-center gap-[16px]'>
                     <Link to='/'>
-                        {/* <AvatarButtonHeader
-                            src={data?.results[0]?.logo}
-                            className={`flex items-center gap-4 font-bold`}
-                            text={data?.results[0]?.name}
-                        /> */}
                         <img src={data?.results[0]?.logo} className='w-[195px] h-[40px] rounded-lg object-cover'/>
                     </Link>
 
@@ -98,7 +88,7 @@ function TempHeader({ setModalLogOut}) {
                             <input
                             onClick={() => setShowSearch(true)}
                             type="text"
-                            placeholder="البحث في المنتجات..."
+                            placeholder="جستجو در محصولات..."
                             className={`w-full rounded-lg border border-Gray1 bg-white py-[9px] pl-10 pr-4 text-sm outline-none ${location.pathname !== '/' ? '!bg-transparent border border-gray-300' : 'bg-white'}`}
                             />
                             
@@ -170,10 +160,10 @@ function TempHeader({ setModalLogOut}) {
                     {accessToken ? (
                         <DropDownMenu
                             buttonMenu={
-                                <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className={`w-10 h-10 rounded-lg border border-BorderBlue`} alt="" srcset="" />
+                                <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className={`w-10 h-10 rounded-lg border border-BorderBlue`} alt="" />
                             }
-                            text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
-                            buttonTop='وتعديل المعلومات'
+                            text={`${dataProfile?.name === null ? 'نامشخص' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            buttonTop='ویرایش اطلاعات'
                             buttonbottom='خروج'
                             onClickEdit={() => navigate('/profile')}
                             onClickExit={() => console.log(setModalLogOut(true)) }
@@ -183,7 +173,7 @@ function TempHeader({ setModalLogOut}) {
                             onClick={() => navigate('/login')}
                             src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
                             className={`flex items-center gap-4 font-bold cursor-pointer`}
-                            text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            text={`${dataProfile?.name === null ? 'نامشخص' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
                         />
                     )}
 

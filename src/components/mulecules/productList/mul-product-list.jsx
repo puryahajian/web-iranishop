@@ -17,12 +17,16 @@ function MulProductList() {
                     <div className='grid grid-cols-4 gap-6'>
                         <div>
                             <TempBoxWhite className={`!mt-0`}>
-                                <Input placeholder={'بحث'} value={search} onChange={e => setSearch(e.target.value)} />
+                                <Input 
+                                    placeholder={'جستجو'} 
+                                    value={search} 
+                                    onChange={e => setSearch(e.target.value)} 
+                                />
                             </TempBoxWhite>
 
                             <TempBoxWhite>
                                 <div className='flex items-center justify-center'>
-                                    <Text>قريباً !</Text>
+                                    <Text>به زودی!</Text>
                                 </div>
                             </TempBoxWhite>
                         </div>

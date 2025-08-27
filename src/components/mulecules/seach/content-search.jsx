@@ -6,12 +6,6 @@ import Input from '../../atoms/input';
 function ContentSearch({ setSearch }) {
   const [search, setSearchInput] = useState('');
 
-  const handleGetValue = () => {
-    if (search.trim()) {
-      setSearch(search); // مقدار سرچ رو بفرسته بالا
-    }
-  };
-
   return (
     <div className="text-center items-center justify-center">
       {/* <Text className="text-4xl mb-3 font-bold">بحث</Text>
@@ -44,7 +38,7 @@ function ContentSearch({ setSearch }) {
                 setSearchInput(e.target.value)
                 setSearch(search);
             }}
-            placeholder="بحث المنتج"
+            placeholder="جستجوی محصول"
             classIcon={`hidden`}
             className={`pr-2 w-full bg-transparent border-none placeholder:text-gray-400`}
           />

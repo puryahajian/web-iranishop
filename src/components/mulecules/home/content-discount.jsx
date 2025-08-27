@@ -37,7 +37,7 @@ function ContentDiscount() {
         <div className='my-[72px] bg-BorderBlue rounded-lg p-6'>
             <div className='flex items-center gap-2 mb-10'>
                 <div className='border-2 border-white bg-white w-6 h-2 rounded-sm'/>
-                <Text className={`font-bold text-white text-lg`}>المنتجات المخفضة</Text>
+                <Text className={`font-bold text-white text-lg`}>محصولات تخفیف‌دار</Text>
             </div>
             <div className='relative'>
                 <button onClick={() => scrollSlider('left')} className='absolute z-10 left-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 opacity-80 hover:opacity-100 transition'>

@@ -10,30 +10,29 @@ function ContentResponsSearch({ search }) {
     const navigate = useNavigate();
     const { data, isLoading, isError } = useGetProduct(search);
     const handleCardClick = (id) => {
-        // e.preventDefault();
         navigate(`/product-detail/${id}`);
-        // console.log(id)
     };
 
     if (!search) {
-        return <div className='w-full mt-11 flex justify-center'><img src={ResponseIcon} className='w-[200px]' alt="" srcset="" /></div>;
+        return <div className='w-full mt-11 flex justify-center'>
+            <img src={ResponseIcon} className='w-[200px]' alt="" />
+        </div>;
     }
 
     if (isLoading) {
-        return <p className="text-center mt-12">جاري البحث...</p>;
+        return <p className="text-center mt-12">در حال جستجو...</p>;
     }
 
     if (isError) {
-        return <p className="text-center mt-12">خطأ في جلب البيانات</p>;
+        return <p className="text-center mt-12">خطا در دریافت اطلاعات</p>;
     }
 
     if (!data || data?.results?.length === 0) {
-        return <p className="text-center mt-12">لم يتم العثور على المنتج</p>;
+        return <p className="text-center mt-12">محصولی یافت نشد</p>;
     }
 
-
     return (
-        <div className=" flex gap-4 mt-2 items-center">
+        <div className="flex gap-4 mt-2 items-center">
             {data.results.map((item) => (
                 <ContentResponseSearch
                     key={item?.id}
@@ -45,9 +44,7 @@ function ContentResponsSearch({ search }) {
                         e.preventDefault();
                         handleCardClick(item.id)
                     }}
-
                 />
-                
             ))}
         </div>
     );

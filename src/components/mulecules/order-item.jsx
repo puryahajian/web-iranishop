@@ -2,14 +2,14 @@ import React from 'react';
 
 const getStatusText = (state) => {
     switch (state) {
-        case 0: return 'في انتظار التأكيد';
-        case 1: return 'قيد الدفع';
-        case 2: return 'قيد التجهيز';
-        case 3: return 'ملغي';
-        case 4: return 'تم الإرسال';
-        case 5: return 'في انتظار اختيار السائق';
-        case 8: return 'تم التسليم';
-        default: return 'غير معروف';
+        case 0: return 'در انتظار تایید';
+        case 1: return 'در حال پرداخت';
+        case 2: return 'در حال آماده‌سازی';
+        case 3: return 'لغو شده';
+        case 4: return 'ارسال شد';
+        case 5: return 'در انتظار انتخاب راننده';
+        case 8: return 'تحویل داده شد';
+        default: return 'نامشخص';
     }
 };
 
@@ -71,8 +71,8 @@ const OrderItem = ({
         <div style={containerStyle} onClick={onClick}>
             <div style={innerContainerStyle}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <span style={textStyle('bold', 14)}>الطلب : {orderCode}</span>
-                    <div style={{ height: 8 }} />
+                <span style={textStyle('bold', 14)}>سفارش : {orderCode}</span>
+                <div style={{ height: 8 }} />
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <span style={textStyle(500, 14)}>المبلغ : </span>
                         <span style={{ ...textStyle('bold', 18, priceColor), marginLeft: 4 }}>
@@ -81,9 +81,9 @@ const OrderItem = ({
                     </div>
                     <div style={{ height: 8 }} />
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={textStyle(500, 14)}>الحالة : </span>
+                        <span style={textStyle(500, 14)}>وضعیت : </span>
                         <span style={{ ...textStyle(500, 16, getStatusColor(orderState)), marginLeft: 4 }}>
-                        {getStatusText(orderState)}
+                            {getStatusText(orderState)}
                         </span>
                     </div>
                 </div>

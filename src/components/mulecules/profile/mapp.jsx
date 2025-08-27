@@ -50,7 +50,7 @@ function Mapp({ setAddressMapp }) {
           .join("، ");
         setAddressPreview(addressString);
       } else {
-        setAddressPreview("لم يتم العثور على العنوان");
+        setAddressPreview("آدرس پیدا نشد");
       }
     } catch (err) {
       console.error("Error fetching address:", err);
