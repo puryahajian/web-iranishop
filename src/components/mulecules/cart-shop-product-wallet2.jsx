@@ -46,7 +46,8 @@ export function CardShopProductWallet2({
   style = { color: "black", fontSize: 14 },
   check = false,
   avatarButtonConfigRemove,
-  avatarButtonConfigAdd
+  avatarButtonConfigAdd,
+  onClick
 }) {
   return (
     <div
@@ -73,6 +74,7 @@ export function CardShopProductWallet2({
             borderRadius: borderRadiusCard,
             overflow: "hidden"
           }}
+          onClick={onClick}
         >
           <img
             src={imageCard}
@@ -97,6 +99,7 @@ export function CardShopProductWallet2({
               textOverflow: "ellipsis",
             }}
             className="font-bold font-sans text-sm"
+            onClick={onClick}
           >
             {product}
           </span>

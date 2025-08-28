@@ -12,12 +12,13 @@ import ModalGeneral from '../mulecules/modal-general'
 import ContentSearch from '../mulecules/seach/content-search'
 import ContentResponsSearch from '../mulecules/seach/content-respons-search'
 import { useEffect } from 'react'
+import UserIcon from '../../assets/image/Iconly/Profile.png'
 import { useLayoutEffect } from 'react'
 import { useRef } from 'react'
 import Cookies from "js-cookie";
 import DropDownMenu from '../mulecules/drop-down-menu'
 
-function TempHeader({ setModalLogOut}) {
+function TempHeader({ setModalLogOut }) {
     const {data} = useGetOption();
     const {data: dataProfile} = useGetProfile()
     const { cart } = useCart();
@@ -76,6 +77,12 @@ function TempHeader({ setModalLogOut}) {
         };
     }, [shadowSearch]);    
 
+    const handleLogout = () => {
+        if (typeof setModalLogOut === 'function') {
+            setModalLogOut(true);
+        }
+    };
+
     return (
         <div className={`fixed top-0 w-full right-0 shadow-md !px-[62px] z-50 bg-white `}>
             {/* هدر بالا */}
@@ -125,8 +132,8 @@ function TempHeader({ setModalLogOut}) {
 
                                 {/* باکس popup */}
                                 <div className="absolute -top-1 left-0 mt-1 w-full  bg-white z-[21] rounded-lg p-3 pt-0 shadow-lg transition-all ease-in-out transform duration-200">
-                                <ContentSearch setSearch={setSearch} />
-                                <ContentResponsSearch search={search} />
+                                    <ContentSearch setSearch={setSearch} />
+                                    <ContentResponsSearch search={search} />
                                 </div>
                             </div>
                             )}
@@ -140,7 +147,7 @@ function TempHeader({ setModalLogOut}) {
             <div className=''>
                 <div
                     // ref={bottomHeaderRef}
-                    className={` rounded-lg flex justify-between items-center pl-4 z-10  ${location.pathname !== '/' ? 'bg-transparent' : 'bg-white'}`}
+                    className={` rounded-lg flex justify-between items-center z-10  ${location.pathname !== '/' ? 'bg-transparent' : 'bg-white'}`}
                 >
                 <div className='flex gap-14 items-center'>
                     {MenuHeader.map((item, index) => (
@@ -157,7 +164,7 @@ function TempHeader({ setModalLogOut}) {
                     <Link to='/cart' className="relative">
                         <AvatarButtonHeader
                             src={Bag}
-                            className="flex items-center rounded-[8px] font-bold !bg-Gray1"
+                            className="flex items-center w-max rounded-[8px] font-bold !bg-Gray1"
                             classImg="p-[10px] border-transparent"
                         />
                         <span className={`absolute -top-1 flex justify-center items-center -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full transition-all ease-in-out ${cart?.length === 0 ? 'hidden' : ''}`}>
@@ -168,20 +175,21 @@ function TempHeader({ setModalLogOut}) {
                     {accessToken ? (
                         <DropDownMenu
                             buttonMenu={
-                                <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className={`w-10 h-10 rounded-lg border border-BorderBlue`} alt="" srcset="" />
+                                <img src={UserIcon} className={`w-10 h-10 rounded-lg border bg-Gray1 border-BorderBlue `} alt="" srcset="" />
                             }
                             text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
                             buttonTop='وتعديل المعلومات'
                             buttonbottom='خروج'
                             onClickEdit={() => navigate('/profile')}
-                            onClickExit={() => console.log(setModalLogOut(true)) }
+                            onClickExit={handleLogout}
                         />
                     ) : (
                         <AvatarButtonHeader
                             onClick={() => navigate('/login')}
                             src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
                             className={`flex items-center gap-4 font-bold cursor-pointer`}
-                            text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            classText={`hidden`}
+                            // text={`${dataProfile?.name === null ? 'غير معروف' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
                         />
                     )}
 

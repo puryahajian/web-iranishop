@@ -3,7 +3,7 @@ import '../../App.css'
 import Text from '../atoms/text'
 import AvatarButtonHeader from '../mulecules/avatar-button-header'
 import Bag from '../../assets/image/Iconly/Iconly/Bold/Bag.png'
-
+import Loc from '../../assets/image/Iconly/location-pin.png'
 import Button from '../atoms/button'
 import { useLocation } from 'react-router-dom'
 import useGetOption from '../../hooks/use-get-option'
@@ -114,7 +114,7 @@ function TempFooter() {
                         <ul className='grid gap-[18px]'>
                             <li className='flex gap-4'>
                                 <AvatarButtonHeader
-                                    src={Bag}
+                                    src={Loc}
                                     className={`flex items-center rounded-lg w-max min-w-10 min-h-10 font-bold bg-Gray1`}
                                     classImg={`p-[10px] border-transparent`}
                                 />

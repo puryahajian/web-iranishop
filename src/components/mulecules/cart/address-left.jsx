@@ -15,7 +15,7 @@ function AddressLeft() {
     const {data} = useGetProfile();
     const [code, setCode] = useState('');
     const [discountAmount, setDiscountAmount] = useState(0);
-    const tax = 10000;
+    const tax = 0;
     const access = Cookies.get('access');
     const navigate = useNavigate();
 

@@ -8,9 +8,11 @@ import Delete from '../../../assets/image/Iconly/Bold/Delete.png'
 import { useCart } from '../../../context/CartContext'
 import toast from 'react-hot-toast';
 import NotData from '../../../assets/image/undraw_no-data_ig65.svg'
+import { useNavigate } from 'react-router-dom';
 
 function OrdersList() {
     const { cart, updateQuantity, removeFromCart } = useCart();
+    const navigate = useNavigate();
 //    console.log(cart)
     return (
         <div className=' pl-6'>
@@ -22,6 +24,7 @@ function OrdersList() {
             <div className='grid gap-4'>
                 {cart.map((item, index) => (
                     <CardShopProductWallet2
+                        onClick={() => navigate(`/product-detail/${item?.data?.data?.id ?? item?.data?.id}`)}
                         imageCard={item?.data?.data?.image ?? item?.data?.image}
                         product={item?.data?.data?.name ?? item?.data?.om_name}
                         price={`${item?.data?.data?.price ?? item?.data?.price.toLocaleString('fa-IR')} تومان`}
