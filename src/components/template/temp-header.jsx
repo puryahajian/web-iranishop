@@ -160,7 +160,7 @@ function TempHeader({ setModalLogOut}) {
                             className="flex items-center rounded-[8px] font-bold !bg-Gray1"
                             classImg="p-[10px] border-transparent"
                         />
-                        <span className={`absolute -top-1 flex justify-center items-center -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full transition-all ease-in-out ${cart?.length === 0 ? 'hidden' : ''}`}>
+                        <span className={`absolute -top-1 flex justify-center items-center -right-1 bg-BgBlue text-white text-xs font-bold w-5 h-5 rounded-full transition-all ease-in-out ${cart?.length === 0 ? 'hidden' : ''}`}>
                             {cart?.length}
                         </span>
                     </Link>
@@ -170,7 +170,7 @@ function TempHeader({ setModalLogOut}) {
                             buttonMenu={
                                 <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className={`w-10 h-10 rounded-lg border border-BorderBlue`} alt="" srcset="" />
                             }
-                            text={`${dataProfile?.name === null ? 'نامشخض' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            text={`${dataProfile?.name === null ? 'نامشخص' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
                             buttonTop="ویرایش اطلاعات"
                             buttonbottom='خروج'
                             onClickEdit={() => navigate('/profile')}
@@ -181,7 +181,7 @@ function TempHeader({ setModalLogOut}) {
                             onClick={() => navigate('/login')}
                             src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
                             className={`flex items-center gap-4 font-bold cursor-pointer`}
-                            text={`${dataProfile?.name === null ? 'نامشخض' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
+                            text={`${dataProfile?.name === null ? 'نا مشخص' : dataProfile?.name} ${dataProfile?.family === null ? '' : dataProfile?.family}`}
                         />
                     )}
 
