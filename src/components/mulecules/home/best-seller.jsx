@@ -63,8 +63,8 @@ function BestSeller() {
                                     borderRadiusCard="8px"
                                     backgroundColorCard="white"
                                     product={item?.om_name}
-                                    price={`${item?.price?.toLocaleString('fa-IR')} تومان`}
-                                    style={{ color: "#222", fontWeight: "bold" }}
+                                    price={`${item?.price?.toLocaleString('fa-IR')}`}
+                                    style={{ color: "#222", fontWeight: "bold" , display: "flex", alignItems: "center"}}
                                     styleOffer={{ fontSize: "13px" }}
                                     avatarButtonConfig={{
                                         onClick: () => handleGetData(item),

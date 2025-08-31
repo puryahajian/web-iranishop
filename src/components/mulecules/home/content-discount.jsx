@@ -56,8 +56,8 @@ function ContentDiscount() {
                             boxFitCard="contain"
                             width="180px"
                             product={item?.om_name}
-                            price={`${item?.price?.toLocaleString('fa-IR')} ريال`}
-                            priceOffer={`${item?.discounted_price?.toLocaleString('fa-IR')} ريال`}
+                            price={`${item?.price?.toLocaleString('fa-IR')}`}
+                            priceOffer={`${item?.discounted_price?.toLocaleString('fa-IR')}`}
                             style={{ fontSize: 16, color: "#333" }}
                             stylePrice={{ fontWeight: "bold", color: "green" }}
                             styleOffer={{ fontSize: 14, display: item?.discounted_price === 0 ? "none" : "block" }}

@@ -1,4 +1,6 @@
 import React from "react";
+import Rial from '../../assets/image/Iconly/Iconly/Bold/Frame.png'
+
 
 export const AvatarButton = ({ config = {} }) => {
   const {
@@ -155,7 +157,7 @@ export const CardShopProductWallet = ({
           }}
         >
           <div>
-            <div style={style}>{price}</div>
+            <div style={style}>{price} <img src={Rial} alt="" /></div>
             {priceOffer && (
               <div
                 style={{

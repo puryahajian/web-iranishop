@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Rial from '../../assets/image/Iconly/Iconly/Bold/Frame.png'
 
 export function AvatarButtonCardShopProduct({ config = {} }) {
   const {
@@ -157,10 +158,14 @@ export function CardShopProduct({
               ...stylePrice,
               color: stylePrice?.color || "black",
               fontSize: stylePrice?.fontSize || 14,
-              textDecoration: "line-through"
+              textDecoration: "line-through",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px"
             }}
             >
             {price}
+            <img src={Rial} alt="" />
           </div>
           {priceOffer && (
             <div
@@ -168,9 +173,13 @@ export function CardShopProduct({
                 ...styleOffer,
                 color: styleOffer?.color || "red",
                 fontSize: styleOffer?.fontSize || 14,
+                display: "flex",
+                alignItems: "center",
+                gap: "8px"
               }}
               >
               {priceOffer}
+              <img src={Rial} alt="" />
             </div>
           )}
         </div>

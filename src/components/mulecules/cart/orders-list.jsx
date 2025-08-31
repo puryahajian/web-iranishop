@@ -27,7 +27,7 @@ function OrdersList() {
                         onClick={() => navigate(`/product-detail/${item?.data?.data?.id ?? item?.data?.id}`)}
                         imageCard={item?.data?.data?.image ?? item?.data?.image}
                         product={item?.data?.data?.name ?? item?.data?.om_name}
-                        price={`${item?.data?.data?.price ?? item?.data?.price.toLocaleString('fa-IR')} تومان`}
+                        price={`${item?.data?.data?.price ?? item?.data?.price.toLocaleString('fa-IR')}`}
                         numberProduct={item?.quantity}
                         check={true}
                         avatarButtonConfigRemove={{ 

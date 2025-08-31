@@ -2,6 +2,7 @@ import React from 'react'
 import Text from '../../atoms/text'
 import Button from '../../atoms/button'
 import IconCardShopProduct from '../../../assets/image/plus.png';
+import Rial from '../../../assets/image/Iconly/Iconly/Bold/Frame.png'
 
 function ContentResponseSearch({
     srcImage,
@@ -17,7 +18,7 @@ function ContentResponseSearch({
                 <div>
                     <Text>{name}</Text>
                     <hr className='pb-1 mt-1'/>
-                    <Text>{price} تومان</Text>
+                    <Text className={`flex items-center gap-2`}>{price} <img src={Rial} alt="" srcset="" /></Text>
                 </div>
             </div>
             <div className='flex justify-end items-center'>

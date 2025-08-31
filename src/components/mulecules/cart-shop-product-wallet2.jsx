@@ -1,4 +1,6 @@
 import React from "react";
+import Rial from '../../assets/image/Iconly/Iconly/Bold/Frame.png'
+
 
 export function AvatarButtonConfigCardShopProductWallet2({
   onTap,
@@ -106,7 +108,7 @@ export function CardShopProductWallet2({
           <div style={{ height: 8 }}></div>
           <hr style={{ border: "none", borderTop: "1px solid rgba(0,0,0,0.26)", margin: "0" }} />
           <div style={{ height: 8 }}></div>
-          <span style={style}>{price}</span>
+          <span style={{...style, display: "flex", alignItems: "center", gap: "8px"}}>{price} <img src={Rial} alt="" /></span>
         </div>
       </div>
 

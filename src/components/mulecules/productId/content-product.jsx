@@ -10,6 +10,7 @@ import { useCart } from '../../../context/CartContext'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import Delete from '../../../assets/image/Iconly/Bold/Delete.png'
+import Rial from '../../../assets/image/Iconly/Iconly/Bold/Frame.png'
 
 
 function ContentProduct() {
@@ -66,10 +67,10 @@ function ContentProduct() {
                     <div className='mt-[132px] flex justify-between items-center'>
                         <div className='flex gap-4 items-center'>
                             <div className="relative">
-                                <Text className="text-lg">{data?.data?.price} تومان</Text>
+                                <Text className="text-lg flex items-center gap-2">{data?.data?.price} <img src={Rial} alt="" /></Text>
                                 <span className="absolute left-0 top-1/2 w-full h-[2px] bg-black rotate-[-10deg]"></span>
                             </div>
-                            <Text className={`text-2xl font-bold text-red-500`}>{data?.data?.discounted_price} تومان</Text>
+                            <Text className={`text-2xl font-bold text-red-500 flex items-center gap-2`}>{data?.data?.discounted_price} <img src={Rial} alt="" /></Text>
                         </div>
 
                             {cartItem ? (

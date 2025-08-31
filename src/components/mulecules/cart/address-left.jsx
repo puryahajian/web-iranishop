@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import toast from 'react-hot-toast'
 import useGetProfile from '../../../hooks/use-get-profile'
 import { useNavigate } from 'react-router-dom'
+import Rial from '../../../assets/image/Iconly/Iconly/Bold/Frame.png'
 
 function AddressLeft() {
     const { cart, applyDiscount, discountError } = useCart();
@@ -95,18 +96,18 @@ function AddressLeft() {
             {/* فاکتور قیمت‌ها */}
             <div className='flex justify-between items-center mt-6'>
                 <Text>إجمالي السعر : </Text>
-                <Text>{total.toLocaleString('fa-IR')} تومان</Text>
+                <Text className={`flex gap-2 items-center`}>{total.toLocaleString('fa-IR')} <img src={Rial} alt="" srcset="" /></Text>
             </div>
 
             <div className='flex justify-between items-center mt-3'>
                 <Text>ضريبة القيمة المضافة : </Text>
-                <Text>{tax.toLocaleString('fa-IR')} تومان</Text>
+                <Text className={`flex gap-2 items-center`}>{tax.toLocaleString('fa-IR')} <img src={Rial} alt="" srcset="" /></Text>
             </div>
 
             {discountAmount > 0 && (
                 <div className='flex justify-between items-center mt-3 text-green-600'>
                     <Text>الخصم : </Text>
-                    <Text>-{discountAmount.toLocaleString('fa-IR')} تومان</Text>
+                    <Text className={`flex gap-2 items-center`}>-{discountAmount.toLocaleString('fa-IR')} <img src={Rial} alt="" srcset="" /></Text>
                 </div>
             )}
 
@@ -114,7 +115,7 @@ function AddressLeft() {
 
             <div className='flex justify-between items-center mt-3 font-bold text-lg'>
                 <Text>السعر الإجمالي : </Text>
-                <Text>{finalTotal.toLocaleString('fa-IR')} تومان</Text>
+                <Text className={`flex gap-2 items-center`}>{finalTotal.toLocaleString('fa-IR')} <img src={Rial} alt="" srcset="" /></Text>
             </div>
 
 
