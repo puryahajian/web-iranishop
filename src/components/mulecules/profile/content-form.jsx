@@ -7,15 +7,15 @@ import usePatchProfile from '../../../hooks/use-patch-profile'
 import Loading from '../../atoms/loading'
 import toast from 'react-hot-toast'
 
-function ContentForm({ addressMapp }) {
+function ContentForm({ addressPreview , location}) {
     const { data } = useGetProfile();
     const { mutate, isPending } = usePatchProfile();
     const [name, setName] = useState('');
     const [family, setFamily] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
-    const addressLat = addressMapp.latitude;
-    const addressLng = addressMapp.longitude;
+    const addressLat = addressPreview.latitude;
+    const addressLng = addressPreview.longitude;
 
     useEffect(() => {
         if (data) {
@@ -27,20 +27,21 @@ function ContentForm({ addressMapp }) {
     }, [data]);
 
     useEffect(() => {
-        if (addressMapp) {
+        if (addressPreview) {
+            // نمایش آدرس به صورت رشته فارسی (مثلاً road, city, state, country)
             const addressString = [
-                addressMapp.address.city,
-                addressMapp.address.suburb,
-                addressMapp.address.neighbourhood,
-                addressMapp.address.road,
+                addressPreview.region,    // استان
+                addressPreview.locality,  // شهر
+                addressPreview.street,    // خیابان
+                addressPreview.name  
             ].filter(Boolean).join('، ');
             setAddress(addressString);
         }
-    }, [addressMapp]);
+    }, [addressPreview]);
 
     const handleSubmit = (e) => {
         mutate(
-            { name, phone, address, addressLat, addressLng, family },
+            { name, phone, address, family ,location},
             {
                 onSuccess: () => {
                     toast.success('پروفایل با موفقیت به‌روزرسانی شد')

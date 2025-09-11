@@ -8,7 +8,7 @@ function ContentDoubleBanner() {
     // console.log(data)
 
     return (
-        <div className=' grid grid-cols-2 mt-[72px] gap-4'>
+        <div className=' grid grid-cols-2 mt-[72px] gap-4 max-[480px]:hidden'>
             <AvatarButton
                 // onTap={handleClick}
                 width="100%"

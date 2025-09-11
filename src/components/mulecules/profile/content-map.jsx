@@ -4,8 +4,7 @@ import Mapp from './mapp'
 import useGetProfile from '../../../hooks/use-get-profile';
 import axios from 'axios';
 
-function ContentMap({ setAddressMapp }) {
-    const {data} = useGetProfile();
+function ContentMap({ setAddressMapp ,setLocation}) {
 
     return (
         <div className='pr-4'>
@@ -14,7 +13,7 @@ function ContentMap({ setAddressMapp }) {
                 <Text>آدرس خود را با دقت وارد کنید</Text>
             </div>
             <div className='mt-4 rounded-2xl'>
-                <Mapp setAddressMapp={setAddressMapp} />
+                <Mapp setAddressMapp={setAddressMapp} setLocation={setLocation} />
             </div>
         </div>
     )

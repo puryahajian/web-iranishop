@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Text from '../../atoms/text'
-import Edit from '../../../assets/image/Iconly/Bold/Edit.svg'
-import Location from '../../../assets/image/Iconly/Bold/Location.png'
+
 import Input from '../../atoms/input'
 import Button from '../../atoms/button'
 import { useCart } from '../../../context/CartContext'
@@ -15,114 +14,99 @@ function AddressLeft() {
     const {data} = useGetProfile();
     const [code, setCode] = useState('');
     const [discountAmount, setDiscountAmount] = useState(0);
-    const tax = 10000;
+    const tax = 0;
     const access = Cookies.get('access');
     const navigate = useNavigate();
 
     const total = cart.reduce((sum, item) => {
+        // بررسی داده‌ها: اول item.data.data بعد item.data
         const productData = item?.data?.data ?? item?.data;
         const price = productData?.discounted_price ?? productData?.price ?? 0;
         return sum + price * item.quantity;
     }, 0);
 
+    // 🟢 محاسبه قیمت نهایی بعد از تخفیف و مالیات
     const finalTotal = total + tax - discountAmount;
 
     const handleApplyDiscount = () => {
         if (!code) {
-            setDiscountAmount(0);
+            setDiscountAmount(0); // 🔹 وقتی کد خالی باشه، تخفیف صفر میشه
             return;
         }
 
-        const discountValue = applyDiscount(code);
+        const discountValue = applyDiscount(code); // اینجا مبلغ تخفیف برمی‌گرده
         setDiscountAmount(discountValue > 0 ? discountValue : 0);
     };
 
 
     return (
-        <div className='border-r border-BorderGray pr-6'>
-            {/* address */}
-            {access ? (
-                <>
-                <div className='flex justify-between items-center'>
-                    <div className='flex items-center gap-2'>
-                        <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                        <Text className={`font-bold`}>آدرس شما</Text>
-                    </div>
+        <div className='border-r max-[480px]:border-none border-BorderGray pr-6 max-[480px]:pr-0'>
+            
 
-                    <div className='flex gap-2 items-center cursor-pointer' onClick={() => navigate('/profile')}>
-                        <Text className={`text-red-500`}>ویرایش</Text>
-                        <img src={Edit} alt="" />
-                    </div>
-                </div>
-
-                <div className='flex items-center gap-2 mt-[9px]'>
-                    <img src={Location} alt="" />
-                    <Text className={`text-BorderGray`}>{data?.address === "" ? 'لطفاً آدرس خود را وارد کنید' : data?.address}</Text>
-                </div>
-
-                <hr className='border border-Gray1 my-6 w-[93%] m-auto'/>
-                </>
-            ) : (
-                ''
-            )}
+            <hr className='w-[95%] m-auto my-4 hidden max-[480px]:block'/>
 
             {/* discount */}
-            <div className='flex items-center gap-2'>
-                <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                <Text className={`font-bold`}>کد تخفیف</Text>
+            <div className={!access && 'hidden'}>
+                <div className='flex items-center gap-2'>
+                    <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
+                    <Text className={`font-bold`}>کد تخفیف</Text>
+                </div>
+
+                <div className='flex items-center gap-4 mt-2'>
+                    <Input 
+                        classIcon={`hidden`} 
+                        placeholder={`کد تخفیف را وارد کنید`} 
+                        className={`bg-transparent w-full pr-2`}
+                        value={code} 
+                        onChange={(e) => setCode(e.target.value.toUpperCase())}
+                    />
+
+                    <Button
+                        onClick={handleApplyDiscount}
+                        className={`px-10 py-3`}
+                    >
+                        اعمال
+                    </Button>
+                </div>
+                {discountError && <Text className="text-red-500 mt-1">{discountError}</Text>}
             </div>
 
-            <div className='flex items-center gap-4 mt-2'>
-                <Input 
-                    classIcon={`hidden`} 
-                    placeholder={`کد تخفیف را وارد کنید`} 
-                    className={`bg-transparent w-full pr-2`}
-                    value={code} 
-                    onChange={(e) => setCode(e.target.value.toUpperCase())}
-                />
-
-                <Button
-                    onClick={handleApplyDiscount}
-                    className={`px-10 py-3`}
-                >
-                    اعمال
-                </Button>
-            </div>
-            {discountError && <Text className="text-red-500 mt-1">{discountError}</Text>}
+            <hr className='w-[95%] m-auto my-4 hidden max-[480px]:block'/>
 
             {/* فاکتور قیمت‌ها */}
             <div className='flex justify-between items-center mt-6'>
-                <Text>مجموع قیمت : </Text>
-                <Text>{total.toLocaleString('fa-IR')} تومان</Text>
+                <Text>جمع قیمت: </Text>
+                <Text className={`flex gap-2 items-center`}>{total.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
             <div className='flex justify-between items-center mt-3'>
-                <Text>مالیات بر ارزش افزوده : </Text>
-                <Text>{tax.toLocaleString('fa-IR')} تومان</Text>
+                <Text>مالیات بر ارزش افزوده: </Text>
+                <Text className={`flex gap-2 items-center`}>{tax.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
             {discountAmount > 0 && (
                 <div className='flex justify-between items-center mt-3 text-green-600'>
-                    <Text>تخفیف : </Text>
-                    <Text>-{discountAmount.toLocaleString('fa-IR')} تومان</Text>
+                    <Text>تخفیف: </Text>
+                    <Text className={`flex gap-2 items-center`}>-{discountAmount.toLocaleString('fa-IR')} تومان</Text>
                 </div>
             )}
 
             <hr className='border border-Gray1 my-4 w-[93%] m-auto'/>
 
             <div className='flex justify-between items-center mt-3 font-bold text-lg'>
-                <Text>مبلغ نهایی : </Text>
-                <Text>{finalTotal.toLocaleString('fa-IR')} تومان</Text>
+                <Text>قیمت نهایی: </Text>
+                <Text className={`flex gap-2 items-center`}>{finalTotal.toLocaleString('fa-IR')} تومان</Text>
             </div>
 
-
-            <Button onClick={() => {
-                if (!access) {
-                    toast.error('لطفاً وارد حساب کاربری شوید');
-                }
-                }} className={`w-full mt-[40px] py-4 ${!access ? 'bg-gray-400 cursor-not-allowed' : ''}`}>
-                ثبت سفارش
-            </Button>
+            <div className=' max-[480px]:fixed max-[480px]:bottom-0 max-[480px]:right-0 w-full max-[480px]:p-4 mt-8'>
+                <Button onClick={() => {
+                    if (!access) {
+                        toast.error('لطفاً وارد شوید');
+                    }
+                    }} className={`w-full py-4 ${!access ? 'bg-gray-400 cursor-not-allowed max-[480px]:hidden' : 'max-[480px]:flex max-[480px]:justify-center'}`}>
+                    ثبت سفارش
+                </Button>
+            </div>
         </div>
     )
 }

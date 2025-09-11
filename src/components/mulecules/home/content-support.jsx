@@ -22,7 +22,7 @@ function ContentSupport() {
         borderRadius: '8px',
     }
     return (
-        <div className='mt-[72px] grid grid-cols-5 max-[1200px]:grid-cols-2 gap-4'>
+        <div className='mt-[72px] grid grid-cols-5 max-[1200px]:grid-cols-2 gap-4 max-[480px]:hidden'>
             <div style={styleBox}>
                 <img src={Box} style={style} alt="" />
                 <Text>امکان ارسال سریع</Text>

@@ -10,6 +10,7 @@ module.exports = {
         BgBlue: "#ca4f4f",
         BgFooter: "#454545",
         BorderGray: "#BCBCBC",
+        BgTimer: "#f3d8d8",
         Gray1: "#E6E6E6",
       },
       fontFamily: {
