@@ -49,24 +49,18 @@ function MulProfile() {
 
     // اگر addressMapp تغییر کرد، مقدار input آدرس را با آن مقدار به‌روزرسانی کن
     useEffect(() => {
-        if (addressMapp && addressMapp.address) {
+        if (addressPreview) {
             // نمایش آدرس به صورت رشته فارسی (مثلاً road, city, state, country)
             const addressString = [
-                // addressMapp.address.country,
-                // addressMapp.address.state,
-                addressMapp.address.city,
-                addressMapp.address.suburb,
-                addressMapp.address.neighbourhood,
-                addressMapp.address.road,
+                addressPreview.region,    // استان
+                addressPreview.locality,  // شهر
+                addressPreview.street,    // خیابان
+                addressPreview.name  
             ].filter(Boolean).join('، ');
             setAddress(addressString);
-
-            const lat = addressMapp.lat || addressMapp.latitude || addressMapp?.address?.lat;
-            const lng = addressMapp.lon || addressMapp.lng || addressMapp.longitude || addressMapp?.address?.lng;
-            if (lat) setAddressLat(parseFloat(lat));
-            if (lng) setAddressLng(parseFloat(lng));
+            console.log(addressString)
         }
-    }, [addressMapp]);
+    }, [addressPreview]);
 
     useEffect(() => {
         if (dataProfile) {
@@ -135,7 +129,7 @@ function MulProfile() {
                     </div>
                     <div className='grid grid-cols-2 max-[480px]:mt-6'>
                         <ContentForm addressPreview={addressPreview} location={location}/>
-                        <ContentMap setAddressMapp={setAddressMapp} setLocation={setLocation}/>
+                        <ContentMap setAddressPreview={setAddressPreview} setLocation={setLocation}/>
                     </div>
                 </TempBoxWhite>
 
@@ -326,7 +320,7 @@ function MulProfile() {
                     <Text className={``}>الرجاء إدخال موقعك الجغرافي</Text>
                 </div>
 
-                <Mapp setAddressMapp={setAddressMapp} setAddressPreview={setAddressPreview} />
+                <Mapp setAddressPreview={setAddressPreview} setLocation={setLocation} />
 
                 <div className='flex items-center gap-2 mt-4 mb-2'>
                     <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
@@ -337,7 +331,7 @@ function MulProfile() {
                     className={`w-full pr-2`} 
                     classIcon={`hidden`}
                     value={address}
-                    defaultValue={dataProfile?.address}
+                    // defaultValue={dataProfile?.address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
 

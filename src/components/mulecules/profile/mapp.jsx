@@ -75,6 +75,7 @@ export default function Mapp({ setAddressPreview, setLocation }) {
         const addressProps = data.features[0].properties;
         setLocation(data)
         setAddressPreview(addressProps);
+        // console.log(addressProps)
        
       } else {
         // setAddressPreview("آدرس پیدا نشد");
