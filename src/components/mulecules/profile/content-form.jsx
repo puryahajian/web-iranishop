@@ -8,7 +8,7 @@ import Loading from '../../atoms/loading'
 import toast from 'react-hot-toast'
 
 
-function ContentForm({ addressMapp }) {
+function ContentForm({ addressPreview , location }) {
     const {data} = useGetProfile();
     // console.log(addressMapp)
     const {mutate, isPending} = usePatchProfile();
@@ -16,9 +16,6 @@ function ContentForm({ addressMapp }) {
     const [family, setFamily] = useState();
     const [phone, setPhone] = useState();
     const [address, setAddress] = useState();
-    const addressLat = addressMapp.latitude;
-    const addressLng = addressMapp.longitude;
-
 
     useEffect(() => {
         if (data) {
@@ -31,24 +28,22 @@ function ContentForm({ addressMapp }) {
 
     // اگر addressMapp تغییر کرد، مقدار input آدرس را با آن مقدار به‌روزرسانی کن
     useEffect(() => {
-        if (addressMapp) {
+        if (addressPreview) {
             // نمایش آدرس به صورت رشته فارسی (مثلاً road, city, state, country)
             const addressString = [
-                // addressMapp.address.country,
-                // addressMapp.address.state,
-                addressMapp.address.city,
-                addressMapp.address.suburb,
-                addressMapp.address.neighbourhood,
-                addressMapp.address.road,
+                addressPreview.region,    // استان
+                addressPreview.locality,  // شهر
+                addressPreview.street,    // خیابان
+                addressPreview.name  
             ].filter(Boolean).join('، ');
             setAddress(addressString);
         }
-    }, [addressMapp]);
+    }, [addressPreview]);
 
     const handleSubmit = (e) => {
         mutate(
             {
-                name, phone, address, addressLat, addressLng, family
+                name, phone, address, location, family
             },
             {
                 onSuccess: () => {
@@ -60,11 +55,11 @@ function ContentForm({ addressMapp }) {
 
     return (
         <div className='border-l border-BorderGray pl-6'>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div className='grid grid-cols-2 gap-4'>
                     <div>
                         <div className='flex items-center gap-2'>
-                            <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
+                            <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
                             <Text className={``}>الاسم </Text>
                         </div>
                         <Input
@@ -78,7 +73,7 @@ function ContentForm({ addressMapp }) {
                     </div>
                     <div>
                         <div className='flex items-center gap-2'>
-                            <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
+                            <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
                             <Text className={``}>اسم العائلة</Text>
                         </div>
                         <Input
@@ -93,7 +88,7 @@ function ContentForm({ addressMapp }) {
                 </div>
 
                 <div className='flex items-center gap-2 mt-4'>
-                    <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
+                    <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
                     <Text className={``}>رقم الجوال</Text>
                 </div>
                 <Input
@@ -106,7 +101,7 @@ function ContentForm({ addressMapp }) {
                 />
 
                 <div className='flex items-center gap-2 mt-4'>
-                    <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
+                    <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
                     <Text className={``}>العنوان</Text>
                 </div>
                 <Input

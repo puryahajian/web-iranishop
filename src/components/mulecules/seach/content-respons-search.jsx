@@ -33,22 +33,24 @@ function ContentResponsSearch({ search }) {
 
 
     return (
-        <div className=" flex gap-4 mt-2 items-center">
-            {data.results.map((item) => (
-                <ContentResponseSearch
-                    key={item?.id}
-                    icon={<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 256 256"><path fill="#f15923" d="M200 64v104a8 8 0 0 1-16 0V83.31L69.66 197.66a8 8 0 0 1-11.32-11.32L172.69 72H88a8 8 0 0 1 0-16h104a8 8 0 0 1 8 8"></path></svg>}
-                    name={item?.name}
-                    price={item.price?.toLocaleString("fa-IR")}
-                    srcImage={item?.image}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        handleCardClick(item.id)
-                    }}
+        <div className='max-h-[400px] overflow-auto'>
+            <div className="grid grid-cols-3 gap-4 mt-2 items-center max-[480px]:grid-cols-1">
+                {data.results.map((item) => (
+                    <ContentResponseSearch
+                        key={item?.id}
+                        icon={<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 256 256"><path fill="#f15923" d="M200 64v104a8 8 0 0 1-16 0V83.31L69.66 197.66a8 8 0 0 1-11.32-11.32L172.69 72H88a8 8 0 0 1 0-16h104a8 8 0 0 1 8 8"></path></svg>}
+                        name={item?.om_name}
+                        price={item.price?.toLocaleString("fa-IR")}
+                        srcImage={item?.image}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleCardClick(item.id)
+                        }}
 
-                />
-                
-            ))}
+                    />
+                    
+                ))}
+            </div>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { PencilIcon } from '@heroicons/react/16/solid'
 import Text from '../atoms/text'
 
-function DropDownMenu({ buttonMenu, buttonTop, buttonbottom, text, onClickEdit, onClickExit }) {
+function DropDownMenu({ buttonMenu, buttonTop, buttonbottom, text, onClickEdit, onClickExit, classText }) {
     return (
         <div className='relative mt-2'>
             <Menu>
@@ -11,7 +11,7 @@ function DropDownMenu({ buttonMenu, buttonTop, buttonbottom, text, onClickEdit, 
                     <>
                         <MenuButton className="inline-flex items-center gap-2 focus:outline-none">
                             {buttonMenu}
-                            <Text className="text-gray-500">{text}</Text>
+                            <Text className={`text-gray-500 ${classText}`}>{text}</Text>
                         </MenuButton>
 
                         {open && (
@@ -35,12 +35,12 @@ function DropDownMenu({ buttonMenu, buttonTop, buttonbottom, text, onClickEdit, 
                                     </button>
                                 )}
                             </MenuItem>
-                            <div className="my-1 h-px bg-gray-200" />
+                            <div className="my-1 h-px bg-gray-200 max-[480px]:hidden" />
                             <MenuItem>
                                 {({ active }) => (
                                     <button
                                         onClick={onClickExit}
-                                        className={`group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-gray-500 ${
+                                        className={`group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-gray-500 max-[480px]:hidden ${
                                             active ? 'bg-gray-100' : ''
                                         }`}
                                     >

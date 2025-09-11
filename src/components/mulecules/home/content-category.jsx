@@ -20,17 +20,18 @@ function ContentCategory() {
     return (
         <div className=''>
             <div className='flex items-center gap-2'>
-                <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-lg'/>
-                <Text className={`font-bold`}>التصنيفات</Text>
+                <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-lg'/>
+                <Text className={`font-bold text-BgCustom`}>التصنيفات</Text>
             </div>
 
             {/* items category */}
-            <div className='flex gap-6 flex-wrap mt-4'>
-                {mainCategoriesOrder?.map((item) => (
+            <div className='flex gap-6 flex-wrap mt-4 max-[480px]:grid max-[480px]:grid-cols-4 max-[480px]:gap-2'>
+                {mainCategoriesOrder?.map((item, index) => (
                     <AvatarButton
+                        key={item?.id || index}
                         onTap={() => handleClick(item?.id)}
                         width="79px"
-                        className={`w-max h-max`}
+                        className={`w-max h-max ${index > 3 ? 'max-[480px]:hidden' : ''}`}
                         height="79px"
                         borderRadius="8px"
                         borderRadiusImage="4px"
@@ -39,6 +40,8 @@ function ContentCategory() {
                         boxFit="cover"
                         text={item?.om_name}
                         marginBottom="7px"
+                        // classOut="rounded-lg"
+                        // classImg="rounded-[4px]"
                     />
                 ))}
             </div>

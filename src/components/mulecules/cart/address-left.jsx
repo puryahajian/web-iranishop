@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Text from '../../atoms/text'
-import Edit from '../../../assets/image/Iconly/Bold/Edit.svg'
-import Location from '../../../assets/image/Iconly/Bold/Location.png'
+
 import Input from '../../atoms/input'
 import Button from '../../atoms/button'
 import { useCart } from '../../../context/CartContext'
@@ -42,56 +41,38 @@ function AddressLeft() {
 
 
     return (
-        <div className='border-r border-BorderGray pr-6'>
-            {/* address */}
-            {access ? (
-                <>
-                <div className='flex justify-between items-center'>
-                    <div className='flex items-center gap-2'>
-                        <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                        <Text className={`font-bold`}>عنوانك</Text>
-                    </div>
+        <div className='border-r max-[480px]:border-none border-BorderGray pr-6 max-[480px]:pr-0'>
+            
 
-                    <div className='flex gap-2 items-center cursor-pointer' onClick={() => navigate('/profile')}>
-                        <Text className={`text-red-500`}>تعديل</Text>
-                        <img src={Edit} alt="" />
-                    </div>
-                </div>
-
-                <div className='flex items-center gap-2 mt-[9px]'>
-                    <img src={Location} alt="" />
-                    <Text className={`text-BorderGray`}>{data?.address === "" ? 'من فضلك أدخل العنوان' : data?.address}</Text>
-                </div>
-
-                <hr className='border border-Gray1 my-6 w-[93%] m-auto'/>
-                </>
-            ) : (
-                ''
-            )}
+            <hr className='w-[95%] m-auto my-4 hidden max-[480px]:block'/>
 
             {/* discount */}
-            <div className='flex items-center gap-2'>
-                <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
-                <Text className={`font-bold`}>رمز الخصم</Text>
+            <div className={!access && 'hidden'}>
+                <div className='flex items-center gap-2'>
+                    <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
+                    <Text className={`font-bold`}>رمز الخصم</Text>
+                </div>
+
+                <div className='flex items-center gap-4 mt-2'>
+                    <Input 
+                        classIcon={`hidden`} 
+                        placeholder={`أدخل رمز الخصم`} 
+                        className={`bg-transparent w-full pr-2`}
+                        value={code} 
+                        onChange={(e) => setCode(e.target.value.toUpperCase())}
+                    />
+
+                    <Button
+                        onClick={handleApplyDiscount}
+                        className={`px-10 py-3`}
+                    >
+                        يتقدم
+                    </Button>
+                </div>
+                {discountError && <Text className="text-red-500 mt-1">{discountError}</Text>}
             </div>
 
-            <div className='flex items-center gap-4 mt-2'>
-                <Input 
-                    classIcon={`hidden`} 
-                    placeholder={`أدخل رمز الخصم`} 
-                    className={`bg-transparent w-full pr-2`}
-                    value={code} 
-                    onChange={(e) => setCode(e.target.value.toUpperCase())}
-                />
-
-                <Button
-                    onClick={handleApplyDiscount}
-                    className={`px-10 py-3`}
-                >
-                    يتقدم
-                </Button>
-            </div>
-            {discountError && <Text className="text-red-500 mt-1">{discountError}</Text>}
+            <hr className='w-[95%] m-auto my-4 hidden max-[480px]:block'/>
 
             {/* فاکتور قیمت‌ها */}
             <div className='flex justify-between items-center mt-6'>
@@ -118,14 +99,15 @@ function AddressLeft() {
                 <Text className={`flex gap-2 items-center`}>{finalTotal.toLocaleString('fa-IR')} <img src={Rial} alt="" srcset="" /></Text>
             </div>
 
-
-            <Button onClick={() => {
-                if (!access) {
-                    toast.error('لطفا لاگین کنید');
-                }
-                }} className={`w-full mt-[40px] py-4 ${!access ? 'bg-gray-400 cursor-not-allowed' : ''}`}>
-                عرض الطلب
-            </Button>
+            <div className=' max-[480px]:fixed max-[480px]:bottom-0 max-[480px]:right-0 w-full max-[480px]:p-4 mt-8'>
+                <Button onClick={() => {
+                    if (!access) {
+                        toast.error('الرجاء تسجيل الدخول');
+                    }
+                    }} className={`w-full py-4 ${!access ? 'bg-gray-400 cursor-not-allowed max-[480px]:hidden' : 'max-[480px]:flex max-[480px]:justify-center'}`}>
+                    عرض الطلب
+                </Button>
+            </div>
         </div>
     )
 }

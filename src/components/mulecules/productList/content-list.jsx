@@ -27,7 +27,7 @@ function ContentList({ search }) {
         toast.success('تمت الإضافة إلى سلة التسوق');
     }
     return (
-        <div className='mt-4 grid grid-cols-4 max-[1200px]:grid-cols-3 max-[860px]:grid-cols-2  gap-[18px] '>
+        <div className='mt-4 grid border grid-cols-4 max-[1200px]:grid-cols-3 max-[860px]:grid-cols-2  gap-[18px] '>
             {filtered?.map((item) => (
                 <CardShopProduct
                     // width="200px"

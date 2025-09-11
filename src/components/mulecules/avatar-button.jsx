@@ -6,15 +6,15 @@ const AvatarButton = ({
     height,
     className,
     padding = 8 || padding,
-    border = "1px solid #BCBCBC" || border,
-    borderRadius = 0,
+    border = "1px solid #ccc" || border,
     color = "white",
     text,
+    classOut,
+    classImg,
     marginBottom,
     // Image props
     paddingImage = 8,
     marginImage = "auto",
-    borderRadiusImage,
     image ,
     boxFit = "cover",
 
@@ -29,13 +29,14 @@ const AvatarButton = ({
         <div style={{ textAlign: "center"}} className={className}>
             <div
                 onClick={onTap || (() => {})}
+                role="button"
+                className="rounded-lg"
                 style={{
                     width: width,
                     height: height,
                     padding: padding,
                     overflow: "hidden",
                     border: border,
-                    borderRadius: borderRadius,
                     backgroundColor: color,
                     display: "flex",
                     alignItems: "center",
@@ -49,10 +50,10 @@ const AvatarButton = ({
                 >
                 {check ? (
                     <div
+                    className="rounded-[4px]"
                     style={{
                         padding: paddingImage,
                         margin: marginImage,
-                        borderRadius: borderRadiusImage,
                         width: "100%",
                         height: "100%",
                         backgroundImage: `url(${image})`,

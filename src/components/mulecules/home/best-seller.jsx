@@ -10,8 +10,8 @@ import toast from 'react-hot-toast'
 
 function BestSeller() {
     const {data} = useGetBestSeller();
-    console.log(data)
-    const { cart, addToCart } = useCart();
+    // console.log(data)
+    const { addToCart } = useCart();
     // console.log(cart)
     const navigate = useNavigate();
     const sliderRef = useRef(null);
@@ -33,6 +33,7 @@ function BestSeller() {
             sliderRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
     }
+    
     // Group items in pairs for vertical stacking
     const grouped = [];
     if (data?.results?.length) {
@@ -41,13 +42,13 @@ function BestSeller() {
         }
     }
     return (
-        <div className='mt-[72px]'>
-            <div className='flex items-center gap-2 mb-10'>
-                <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
+        <div className='mt-[72px] max-[480px]:mt-0'>
+            <div className='flex items-center gap-2 mb-6'>
+                <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
                 <Text className={`font-bold`}>الأكثر مبيعاً</Text>
             </div>
             <div className='relative'>
-                <button onClick={() => scrollSlider('left')} className='absolute z-10 left-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 opacity-80 hover:opacity-100 transition'>
+                <button onClick={() => scrollSlider('left')} className='absolute z-10 left-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 opacity-80 hover:opacity-100 transition max-[480px]:hidden'>
                     <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
                 <div ref={sliderRef} className='flex gap-[18px] overflow-x-auto scroll-slider scrollbar-thin scrollbar-thumb-gray-300 pb-2 scroll-smooth'>
@@ -79,7 +80,7 @@ function BestSeller() {
                         </div>
                     ))}
                 </div>
-                <button onClick={() => scrollSlider('right')} className='absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 opacity-80 hover:opacity-100 transition'>
+                <button onClick={() => scrollSlider('right')} className='absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 opacity-80 hover:opacity-100 transition max-[480px]:hidden'>
                     <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
             </div>

@@ -7,7 +7,19 @@ import {
 import Button from "../atoms/button";
 
 
-function ModalGeneral({ Title, children, classBtns, isOpen, close, onSuccess, textAccept }) {
+function ModalGeneral({ 
+    Title, 
+    children, 
+    classBtns, 
+    isOpen, 
+    close, 
+    onSuccess, 
+    textAccept, 
+    classModal,
+    classAccess,
+    classCanceled 
+    }) {
+
     return (
         <Dialog
         open={isOpen}
@@ -25,7 +37,7 @@ function ModalGeneral({ Title, children, classBtns, isOpen, close, onSuccess, te
                 <div className="flex min-h-full items-center justify-center p-4">
                     <DialogPanel
                         transition
-                        className="w-full max-w-[400px] rounded-xl bg-white p-6  duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
+                        className={`w-full max-w-[400px] rounded-xl bg-white p-6  duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0 ${classModal}`}
                     >
                         <DialogTitle
                             as="h3"
@@ -38,13 +50,13 @@ function ModalGeneral({ Title, children, classBtns, isOpen, close, onSuccess, te
 
                         <div className={`mt-4 ${classBtns}`}>
                             <Button
-                                className="items-center gap-2 rounded-lg px-3 py-2 "
+                                className={`items-center gap-2 rounded-lg px-3 py-2 ${classAccess}`}
                                 onClick={onSuccess}
                             >
                                 {textAccept}
                             </Button>
                             <Button
-                                className="items-center gap-2 rounded-lg px-3 py-2 font-sans bg-transparent border !border-BgBlue font-semibold !text-BgBlue"
+                                className={`items-center gap-2 rounded-lg px-3 py-2 font-sans bg-transparent border !border-BgCustom font-semibold !text-BgCustom ${classCanceled}`}
                                 onClick={close}
                             >
                                 إغلاق

@@ -1,5 +1,6 @@
 import React from 'react'
 import Text from '../../atoms/text'
+import Title from '../../atoms/title'
 import OrderItem from '../order-item';
 import { CardShopProductWallet } from '../card-shop-product-wallet';
 import { CardShopProductWallet2 } from '../cart-shop-product-wallet2';
@@ -9,15 +10,62 @@ import { useCart } from '../../../context/CartContext'
 import toast from 'react-hot-toast';
 import NotData from '../../../assets/image/undraw_no-data_ig65.svg'
 import { useNavigate } from 'react-router-dom';
+import Cookies from "js-cookie";
+import Edit from '../../../assets/image/Iconly/Bold/Edit.svg'
+import Location from '../../../assets/image/Iconly/Bold/Location.png'
+import useGetProfile from '../../../hooks/use-get-profile';
+
 
 function OrdersList() {
+    const {data} = useGetProfile();
     const { cart, updateQuantity, removeFromCart } = useCart();
     const navigate = useNavigate();
+    const access = Cookies.get('access');
+
 //    console.log(cart)
     return (
-        <div className=' pl-6'>
+        <>
+        <div className={!access ? 'flex justify-between items-center' : 'hidden'}>
+            <Title className={`text-gray-400`}>تحتاج إلى التسجيل للاستمرار في الشراء</Title>
+
+            <button onClick={() => navigate('/login')} className='text-BgCustom'>تسجیل</button>
+        </div>
+
+        <hr className={!access ? 'w-[95%] m-auto my-11' : 'hidden'}/>
+
+        {/* address */}
+        {access ? (
+            <>
+            <div className='hidden justify-between border p-4 rounded-lg items-center max-[480px]:flex'>
+                <div>
+                    <div className='flex items-center'>
+                        <div className='flex items-center gap-2'>
+                            <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
+                            <Text className={`font-bold`}>عنوانك</Text>
+                        </div>
+                    </div>
+
+                    <div className='flex items-center gap-2 mt-[9px]'>
+                        <img src={Location} alt="" />
+                        <Text className={`text-BorderGray`}>{!data?.address ? 'من فضلك أدخل العنوان' : data?.address}</Text>
+                    </div>
+                </div>
+
+                <div className='flex gap-2 items-center cursor-pointer' onClick={() => navigate('/profile')}>
+                    <Text className={`text-red-500`}>تعديل</Text>
+                    <img src={Edit} alt="" />
+                </div>
+            </div>
+
+            <hr className='border border-Gray1 my-6 w-[93%] m-auto hidden max-[480px]:block'/>
+            </>
+        ) : (
+            ''
+        )}
+
+        <div className='pl-6 max-[480px]:pl-0'>
             <div className='flex items-center gap-2 mb-4'>
-                <div className='border-2 border-BorderBlue bg-BorderBlue w-6 h-2 rounded-sm'/>
+                <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
                 <Text className={`font-bold`}>قائمة الطلبات</Text>
             </div>
 
@@ -62,6 +110,7 @@ function OrdersList() {
                 )}
             </div>
         </div>
+        </>
     )
 }
 

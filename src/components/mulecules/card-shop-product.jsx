@@ -88,7 +88,7 @@ export function CardShopProduct({
         alignItems: "center",
         cursor: onTapCard ? "pointer" : "default",
         width: width,
-        minWidth: "150px",
+        minWidth: "180px",
         boxSizing: "border-box",
       }}
     >

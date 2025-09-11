@@ -15,7 +15,7 @@ function TempFooter() {
     const location = useLocation();
 
     return (
-        <div className='border h-[425px] max-[990px]:h-max mt-[100px] bg-BgFooter rounded-[8px] flex justify-center relative p-6' style={{direction: 'rtl'}}>
+        <div className='border h-[425px] max-[990px]:h-max mt-[100px] bg-BgFooter rounded-[8px] flex justify-center relative p-6 max-[480px]:hidden' style={{direction: 'rtl'}}>
             <div className={`absolute m-auto bottom-0 -mb-7 rounded-tr-[56px] rounded-tl-[56px] p-4 ${location.pathname !== '/' ? 'bg-[#E6E6E6]' : 'bg-white'}`}> 
                 <div className={`w-8 h-8 bg-BgFooter absolute -right-[29px] top-[20px] rounded-bl-[32px] ${location.pathname !== '/' ? 'shadow-[-3px_11px_0_2px_#E6E6E6]' : 'shadow-[-3px_11px_0_2px_white]'}`}></div>
                 <div className={`w-8 h-8 bg-BgFooter absolute -left-[29px] top-[20px] rounded-br-[32px] ${location.pathname !== '/' ? 'shadow-[6px_11px_0_2px_#E6E6E6]' : 'shadow-[6px_11px_0_2px_white]'}`}></div>

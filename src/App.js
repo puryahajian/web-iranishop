@@ -13,6 +13,10 @@ import Search from './pages/search';
 import ScrollToTop from './lib/scroll-to-top';
 import ModalGeneral from './components/mulecules/modal-general';
 import Cookies from "js-cookie";
+import TempMenuBottomMobile from './components/template/temp-menu-bottom-mobile';
+import ActiveOrderMobile from './pages/active-order-mobile';
+import Transactios from './pages/transaction';
+import ContentUsMobile from './pages/content-us-mobile';
 
 
 function App() {
@@ -21,19 +25,35 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/") {
-      document.body.style.backgroundColor = "white";
-      if (location.pathname === "/login") {
-        document.body.style.backgroundColor = "white";
+    const mq = window.matchMedia('(max-width: 480px)');
+
+    const applyBackground = () => {
+      if (mq.matches) {
+        document.body.style.backgroundColor = 'white';
+      } else {
+        if (location.pathname === '/' || location.pathname === '/login') {
+          document.body.style.backgroundColor = 'white';
+        } else {
+          document.body.style.backgroundColor = '#E6E6E6';
+        }
       }
-    } else {
-      document.body.style.backgroundColor = "#E6E6E6"; // وردي فاتح أو أي لون آخر
-    }
+    };
+
+    applyBackground();
+    mq.addEventListener('change', applyBackground);
 
     return () => {
-      document.body.style.backgroundColor = "";
+      mq.removeEventListener('change', applyBackground);
+      document.body.style.backgroundColor = '';
     };
   }, [location.pathname]);
+
+  // Global logout modal opener
+  useEffect(() => {
+    const open = () => setModalLogOut(true);
+    document.addEventListener('openLogoutModal', open);
+    return () => document.removeEventListener('openLogoutModal', open);
+  }, []);
 
   const handleSuccess = () => {
     Cookies.remove('access');
@@ -53,7 +73,11 @@ function App() {
           <Route path='/about-us' element={<AboutUs />} />
           <Route path='/search' element={<Search />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/active-order' element={<ActiveOrderMobile />} />
+          <Route path='/transaction' element={<Transactios />} />
+          <Route path='/content-us' element={<ContentUsMobile />} />
         </Routes>
+        <TempMenuBottomMobile />
 
         {/* modal logout */}
         <ModalGeneral

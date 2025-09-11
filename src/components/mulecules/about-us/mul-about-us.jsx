@@ -10,10 +10,10 @@ function MulAboutUs() {
     
     return (
         <div>
+            <TempHeader/>
             <TempBoxMain>
-                <TempHeader/>
-                <TempBoxWhite>
-                    <div className='flex gap-12'>
+                <TempBoxWhite className={`max-[480px]:mb-[80px] max-[480px]:px-0`}>
+                    <div className='flex gap-12 max-[480px]:grid max-[480px]:grid-cols-1'>
                         <ContentRight/>
 
                         <div className='w-full'>
