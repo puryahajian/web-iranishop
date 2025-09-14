@@ -21,12 +21,12 @@ import usePostAddToCart from '../../../hooks/use-post-add-to-cart';
 function OrdersList() {
     const {data} = useGetProfile();
     const {data: dataGetCart} = useGetCart();
-    console.log(dataGetCart)
+    // console.log(dataGetCart)
     const { mutate } = usePostAddToCart();
 
 
     const handlePositive = (id, quantity) => {
-        console.log(id, quantity)
+        // console.log(id, quantity)
         mutate(
             { 
                 
@@ -65,7 +65,7 @@ function OrdersList() {
                 <div>
                     <div className='flex items-center'>
                         <div className='flex items-center gap-2'>
-                            <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
+                            <div className='border-2 border-BorderBlue bg-BgBlue w-6 h-2 rounded-sm'/>
                             <Text className={`font-bold`}>آدرس شما</Text>
                         </div>
                     </div>
@@ -82,7 +82,7 @@ function OrdersList() {
                 </div>
             </div>
 
-            <hr className='border border-Gray1 my-6 w-[93%] m-auto hidden max-[480px]:block'/>
+            <hr className=' my-6 w-[93%] m-auto hidden max-[480px]:block'/>
             </>
         ) : (
             ''

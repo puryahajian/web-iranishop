@@ -48,8 +48,8 @@ function AddressLeft() {
             {/* discount */}
             <div className={!access && 'hidden'}>
                 <div className='flex items-center gap-2'>
-                    <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
-                    <Text className={`font-bold`}>کد تخفیف</Text>
+                    <div className='border-2 border-BorderBlue bg-BgBlue w-6 h-2 rounded-sm'/>
+                    <Text className={`font-bold text-BgBlue`}>کد تخفیف</Text>
                 </div>
 
                 <div className='flex items-center gap-4 mt-2'>

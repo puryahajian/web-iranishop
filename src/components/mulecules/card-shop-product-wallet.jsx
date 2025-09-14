@@ -7,7 +7,7 @@ export const AvatarButton = ({ config = {} }) => {
     height = 40,
     border = "1px solid transparent",
     borderRadius = "0",
-    backgroundColor = "#f15923",
+    backgroundColor = "#ca4f4f",
     icon,
     iconColor = "black",
     iconSize = 24,

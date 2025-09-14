@@ -124,7 +124,7 @@ function MulProfile() {
             <TempBoxMain className={`max-[480px]:hidden`}>
                 <TempBoxWhite>
                     <div className='items-center gap-2 hidden max-[480px]:flex'>
-                        <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
+                        <div className='border-2 border-BorderBlue bg-BgBlue w-6 h-2 rounded-sm'/>
                         <Text className={`font-bold !text-base`}>پروفایل</Text>
                     </div>
                     <div className='grid grid-cols-2 max-[480px]:mt-6'>
@@ -136,7 +136,7 @@ function MulProfile() {
                 {/* orders */}
                 <TempBoxWhite className='mt-4'>
                     <div className='flex items-center gap-2 mb-4'>
-                        <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
+                        <div className='border-2 border-BorderBlue bg-BgBlue w-6 h-2 rounded-sm'/>
                         <Text className='font-bold !text-base'>سفارش‌ها</Text>
                     </div>
                     <div className='overflow-x-auto'>
@@ -197,7 +197,7 @@ function MulProfile() {
 
                 <div>
                     <div className='flex items-center gap-2 mb-4'>
-                        <div className='border-2 border-BorderCustom bg-BorderCustom w-6 h-2 rounded-sm'/>
+                        <div className='border-2 border-BorderBlue bg-BgBlue w-6 h-2 rounded-sm'/>
                         <Text className='font-bold !text-base'>آدرس</Text>
                     </div>
                     <div className='flex justify-between items-center'>

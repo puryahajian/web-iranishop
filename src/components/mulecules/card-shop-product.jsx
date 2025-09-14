@@ -21,7 +21,7 @@ export function AvatarButtonCardShopProduct({ config = {} }) {
         height,
         border,
         borderRadius,
-        backgroundColor: "#f15923",
+        backgroundColor: "#ca4f4f",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

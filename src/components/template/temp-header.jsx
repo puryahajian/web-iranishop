@@ -19,6 +19,7 @@ import { useLayoutEffect } from 'react'
 import { useRef } from 'react'
 import Cookies from "js-cookie";
 import DropDownMenu from '../mulecules/drop-down-menu'
+import '../../App.css'
 
 function TempHeader({ setModalLogOut }) {
     const {data} = useGetOption();
@@ -214,7 +215,7 @@ function TempHeader({ setModalLogOut }) {
                             />
                         )}
 
-                        <Link to='/cart' className="relative">
+                        <Link to='/cart' className="relative indexAvatarButtonHeader">
                             <AvatarButtonHeader
                                 src={BagWhite}
                                 className="flex items-center w-max rounded-[8px] font-bold !bg-Gray1"
