@@ -6,7 +6,7 @@ export function AvatarButtonConfigCardShopProductWallet2({
   height = 40,
   // border = "1px solid black",
   borderRadius = "8px",
-  color = "#f15923",
+  color = "#ca4f4f",
   icon = "❄",
   colorIcon = "black",
   sizeIcon = 24

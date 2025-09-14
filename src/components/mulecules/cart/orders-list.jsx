@@ -14,15 +14,40 @@ import Cookies from "js-cookie";
 import Edit from '../../../assets/image/Iconly/Bold/Edit.svg'
 import Location from '../../../assets/image/Iconly/Bold/Location.png'
 import useGetProfile from '../../../hooks/use-get-profile';
+import useGetCart from '../../../hooks/use-get-cart';
+import usePostAddToCart from '../../../hooks/use-post-add-to-cart';
 
 
 function OrdersList() {
     const {data} = useGetProfile();
+    const {data: dataGetCart} = useGetCart();
+    console.log(dataGetCart)
+    const { mutate } = usePostAddToCart();
+
+
+    const handlePositive = (id, quantity) => {
+        console.log(id, quantity)
+        mutate(
+            { 
+                
+            },
+            {
+              onSuccess: (data) => {
+                toast.success('محصول به سبد اضافه شد')
+                // console.log(data)
+              },
+              onError: (err) => {
+                console.log(err)
+
+              }
+            }
+        );
+    }
+
     const { cart, updateQuantity, removeFromCart } = useCart();
     const navigate = useNavigate();
     const access = Cookies.get('access');
 
-//    console.log(cart)
     return (
         <>
         <div className={`hidden ${!access ? 'max-[480px]:flex justify-between items-center mb-4' : 'hidden'}`}>
@@ -70,43 +95,103 @@ function OrdersList() {
             </div>
 
             <div className='grid gap-4'>
-                {cart.map((item, index) => (
-                    <CardShopProductWallet2
-                        onClick={() => navigate(`/product-detail/${item?.data?.data?.id ?? item?.data?.id}`)}
-                        imageCard={item?.data?.data?.image ?? item?.data?.image}
-                        product={item?.data?.data?.name ?? item?.data?.om_name}
-                        price={`${item?.data?.data?.price ?? item?.data?.price.toLocaleString('fa-IR')}`}
-                        numberProduct={item?.quantity}
-                        check={true}
-                        avatarButtonConfigRemove={{ 
-                            icon: item?.quantity === 1 ? (
-                                <img onClick={() => {
-                                    removeFromCart(item?.data?.data?.id ?? item?.data?.id)
-                                    toast.success('محصول از سبد خرید حذف شد')
-                                }} src={Delete} alt="" />
-                            ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="white" fillRule="evenodd" d="M5 12a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1" clipRule="evenodd"></path></svg>
-                            ), 
-                            onTap: () => {
-                                updateQuantity(item.data.id, item.quantity - 1);
-                            } 
-                        }}
-                        avatarButtonConfigAdd={{ icon: <img src={Plus}/>, onTap: () => {
-                            // if (item?.data?.id) {
-                                updateQuantity(item.data.id, item.quantity + 1)
-                            // }
-                        }}}
-                    />
-                ))}
-            </div>
-            <div className='m-auto text-center mt-6'>
-                {cart?.length === 0 ? (
+                {!access ? (
                     <>
-                        <img src={NotData} className='w-32 m-auto mb-6' alt="" srcset="" />
-                        <Text>سبد خرید شما خالی است</Text>
+                    {cart.map((item, index) => (
+                        <CardShopProductWallet2
+                            onClick={() => navigate(`/product-detail/${item?.data?.data?.id ?? item?.data?.id}`)}
+                            imageCard={item?.data?.data?.image ?? item?.data?.image}
+                            product={item?.data?.data?.name ?? item?.data?.om_name}
+                            price={`${item?.data?.data?.price ?? item?.data?.price.toLocaleString('fa-IR')}`}
+                            numberProduct={item?.quantity}
+                            check={true}
+                            avatarButtonConfigRemove={{ 
+                                icon: item?.quantity === 1 ? (
+                                    <img onClick={() => {
+                                        removeFromCart(item?.data?.data?.id ?? item?.data?.id)
+                                        toast.success('محصول از سبد خرید حذف شد')
+                                    }} src={Delete} alt="" />
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="white" fillRule="evenodd" d="M5 12a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1" clipRule="evenodd"></path></svg>
+                                ), 
+                                onTap: () => {
+                                    updateQuantity(item.data.id, item.quantity - 1);
+                                } 
+                            }}
+                            avatarButtonConfigAdd={{ icon: <img src={Plus}/>, onTap: () => {
+                                // if (item?.data?.id) {
+                                    updateQuantity(item.data.id, item.quantity + 1)
+                                // }
+                            }}}
+                        />
+                    ))}
                     </>
                 ) : (
-                    ''
+                    <>
+                   {dataGetCart?.results?.map((order) => (
+                        order?.items?.map((item) => (
+                            <CardShopProductWallet2
+                            key={item?.id}
+                            onClick={() => navigate(`/product-detail/${item?.product?.id}`)}
+                            imageCard={item?.product?.image}
+                            product={item?.product?.name}
+                            price={`${item?.product?.price?.toLocaleString('fa-IR')}`}
+                            numberProduct={item?.quantity}
+                            check={true}
+                            avatarButtonConfigRemove={{ 
+                                icon: item?.quantity === 1 ? (
+                                    <img
+                                        onClick={() => {
+                                        removeFromCart(item?.product?.id)
+                                        toast.success('محصول از سبد خرید حذف شد')
+                                        }}
+                                        src={Delete}
+                                        alt=""
+                                    />
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
+                                        <path fill="white" fillRule="evenodd" d="M5 12a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1" clipRule="evenodd"></path>
+                                    </svg>
+                                ), 
+                                onTap: () => {
+                                    updateQuantity(item?.product?.id, item?.quantity - 1);
+                                } 
+                            }}
+                            avatarButtonConfigAdd={{ 
+                                icon: <img src={Plus}/>, 
+                                onTap: () => {
+                                    handlePositive(item?.product?.id, item?.quantity + 1);
+                                }
+                            }}
+                            />
+                        ))
+                        ))}
+                    </>
+                )}
+            </div>
+            <div className='m-auto text-center mt-6'>
+                {!access ? (
+                    <>
+                        {cart?.length === 0 ? (
+                            <>
+                                <img src={NotData} className='w-32 m-auto mb-6' alt="" srcset="" />
+                                <Text>سبد خرید شما خالی است</Text>
+                            </>
+                        ) : (
+                            ''
+                        )}
+                    </>
+                ) : (
+                    <>
+                        {dataGetCart?.count === 0 ? (
+                            <>
+                            <img src={NotData} className='w-32 m-auto mb-6' alt="" srcset="" />
+                            <Text>سبد خرید شما خالی است</Text>
+                            </>
+                        ) : (
+                            ''
+                        )}
+                    </>
                 )}
             </div>
         </div>

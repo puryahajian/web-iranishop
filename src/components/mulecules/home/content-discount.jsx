@@ -8,12 +8,14 @@ import { useNavigate } from 'react-router-dom'
 import '../../../App.css'
 import { useCart } from '../../../context/CartContext'
 import toast from 'react-hot-toast'
+import usePostAddToCart from '../../../hooks/use-post-add-to-cart'
+import Cookies from "js-cookie";
 
 function ContentDiscount() {
     const {data} = useGetWithDiscount();
-    // console.log(data)
     const { cart, addToCart } = useCart();
-    // console.log(cart)
+    const { mutate } = usePostAddToCart();
+    const accessToken = Cookies.get('access');
     const navigate = useNavigate();
     const sliderRef = useRef(null);
     const handleCardClick = (id) => {
@@ -22,6 +24,20 @@ function ContentDiscount() {
     const handleClick = (item) => {
         addToCart(item)
         toast.success('به سبد خرید اضافه شد');
+    }
+
+    const handleAddToCart = (itemId) => {
+        mutate(
+            { 
+                itemId 
+            },
+            {
+              onSuccess: (data) => {
+                toast.success('محصول به سبد اضافه شد')
+                // console.log(data)
+              },
+            }
+        );
     }
     
     const scrollSlider = (direction) => {
@@ -36,7 +52,7 @@ function ContentDiscount() {
 
 
     return (
-        <div className='my-[72px] max-[480px]:my-0 bg-BgCustom max-[480px]:bg-transparent rounded-lg p-6 max-[480px]:px-0'>
+        <div className='my-[72px] max-[480px]:my-0 bg-BgBlue max-[480px]:bg-transparent rounded-lg p-6 max-[480px]:px-0'>
             <div className='flex items-center gap-2 mb-4'>
                 <div className='border-2 border-white max-[480px]:border-BgBlue bg-white max-[480px]:bg-BgBlue w-6 h-2 rounded-sm'/>
                 <Text className={`font-bold text-white max-[480px]:text-BgBlue text-lg`}>محصولات تخفیف‌دار</Text>
@@ -64,7 +80,14 @@ function ContentDiscount() {
                             stylePrice={{ fontWeight: "bold", color: "green" }}
                             styleOffer={{ fontSize: 14, display: item?.discounted_price === 0 ? "none" : "block" }}
                             avatarButtonConfigCardShopProduct={{
-                                onTap: () => handleClick(item),
+                                onTap: () => {
+                                    if (!accessToken) {
+                                        handleClick(item)
+                                        
+                                    } else (
+                                        handleAddToCart(item?.id)
+                                    )
+                                },
                                 width: 40,
                                 height: 40,
                                 border: "1px solid transparent",
