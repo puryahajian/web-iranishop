@@ -33,14 +33,14 @@ function OrgLogin() {
                 },
                 onError: (error) => {
                     setMessageError('اسم المستخدم أو كلمة المرور غير صحيحة!')
-                    console.log(error)
+                    // console.log(error)
                 },
             }
         )
     }
 
     const handleSubmitVerify = () => {
-        console.log(otp, userName)
+        // console.log(otp, userName)
         mutateVerify(
             {
                 otp, userName
@@ -51,7 +51,7 @@ function OrgLogin() {
                 },
                 onError: (error) => {
                     setMessageError('اسم المستخدم أو كلمة المرور غير صحيحة!')
-                    console.log(error)
+                    // console.log(error)
                 },
             }
         )

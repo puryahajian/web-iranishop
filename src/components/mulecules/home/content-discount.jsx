@@ -8,11 +8,16 @@ import { useNavigate } from 'react-router-dom'
 import '../../../App.css'
 import { useCart } from '../../../context/CartContext'
 import toast from 'react-hot-toast'
+import usePostAddToCart from '../../../hooks/use-post-add-to-cart'
+import Cookies from "js-cookie";
 
 function ContentDiscount() {
     const {data} = useGetWithDiscount();
     // console.log(data)
     const { cart, addToCart } = useCart();
+    const accessToken = Cookies.get('access');
+    const { mutate } = usePostAddToCart();
+
     // console.log(cart)
     const navigate = useNavigate();
     const sliderRef = useRef(null);
@@ -22,6 +27,20 @@ function ContentDiscount() {
     const handleClick = (item) => {
         addToCart(item)
         toast.success('تمت الإضافة إلى سلة التسوق');
+    }
+
+    const handleAddToCart = (itemId) => {
+        mutate(
+            { 
+                itemId 
+            },
+            {
+              onSuccess: (data) => {
+                toast.success('محصول به سبد اضافه شد')
+                console.log(data)
+              },
+            }
+        );
     }
     
     const scrollSlider = (direction) => {
@@ -64,7 +83,9 @@ function ContentDiscount() {
                             stylePrice={{ fontWeight: "bold", color: "green" }}
                             styleOffer={{ fontSize: 14, display: item?.discounted_price === 0 ? "none" : "block" }}
                             avatarButtonConfigCardShopProduct={{
-                                onTap: () => handleClick(item),
+                                onTap: () => {
+                                    handleClick(item)
+                                },
                                 width: 40,
                                 height: 40,
                                 border: "1px solid transparent",

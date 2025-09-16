@@ -9,7 +9,7 @@ import { useCart } from '../../../context/CartContext';
 
 function ContentList({ search }) {
     const {data} = useGetSubCategory();
-    // console.log(data)
+    console.log(data)
     const { cart, addToCart } = useCart();
     // console.log(data)
     const filtered = data?.results?.filter(item =>

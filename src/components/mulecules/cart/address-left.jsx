@@ -21,7 +21,7 @@ function AddressLeft() {
 
     const total = cart.reduce((sum, item) => {
         // بررسی داده‌ها: اول item.data.data بعد item.data
-        const productData = item?.data?.data ?? item?.data;
+        const productData = item?.data;
         const price = productData?.discounted_price ?? productData?.price ?? 0;
         return sum + price * item.quantity;
     }, 0);

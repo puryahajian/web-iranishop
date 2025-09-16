@@ -118,10 +118,11 @@ function TempHeader({ setModalLogOut }) {
                             <Text>اتصل بنا</Text>
                         ) : location.pathname.startsWith("/product-detail") ? (
                             <Text>منتج</Text>
+                        ) : location.pathname.startsWith("/category-mobile") ? (
+                            <Text>فئات</Text>
                         ) : (
                             ''
                         )}
-                        
                     </div>
 
                     {/* logo -> desktop */}
