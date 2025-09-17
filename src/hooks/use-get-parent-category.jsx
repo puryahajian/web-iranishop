@@ -1,14 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import interceptor from '../lib/interceptor';
 
-const useGetParentCategory = (parentId, page) => {
-    console.log(parentId, page)
+const useGetParentCategory = (selectedParentId) => {
+    console.log(selectedParentId)
     const { data, error, isLoading } = useQuery({
-        queryKey: ['parentCategories', parentId, page],
+        queryKey: ['parentCategories', selectedParentId],
         queryFn: () => 
-            parentId 
-                ? interceptor.get(`/product/public/api/v1/categories/?page=${page}&parent=${parentId}`).then(res => res.data)
+            selectedParentId
+                ? interceptor.get(`/product/public/api/v1/categories/?parent_id=${selectedParentId}`).then(res => res.data)
                 : null,
+        enabled: !!selectedParentId,
+        keepPreviousData: false, // Don't keep previous data
+        cacheTime: 0, // Don't cache the results
+        refetchOnWindowFocus: false    
     });
 
     return {

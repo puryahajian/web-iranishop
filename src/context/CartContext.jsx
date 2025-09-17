@@ -11,6 +11,8 @@ const DISCOUNT_CODES = {
 
 export const CartProvider = ({ children }) => {
     const {mutate} = usePostAddToCart()
+    const [discountCode, setDiscountCode] = useState(null);
+
 
     const [cart, setCart] = useState(() => {
         const saved = localStorage.getItem("cart");
@@ -85,9 +87,13 @@ export const CartProvider = ({ children }) => {
         return getTotal() + tax - discountAmount;
     };
 
+    // const applyDiscount = (code) => {
+    //     const rate = code;
+    //     console.log(code)
+    //     return getTotal() * rate;
+    // };
     const applyDiscount = (code) => {
-        const rate = DISCOUNT_CODES[code] || 0;
-        return getTotal() * rate;
+        setDiscountCode(code); // فقط کد رو نگه می‌داریم و برای backend می‌فرستیم
     };
 
     const saved = localStorage.getItem("cart");
@@ -99,14 +105,15 @@ export const CartProvider = ({ children }) => {
     }));
 
     useEffect(() => {
+        // console.log(result)
         mutate(
-            { result }, 
+            { result, discountCode }, 
             {
             // onSuccess: (data) => console.log("Cart synced:", data),
             // onError: (err) => console.error("Failed to sync cart:", err),
             }
         );
-    }, [cart, mutate]);
+    }, [cart, mutate, discountCode]);
     // console.log(cart)
 
     return (

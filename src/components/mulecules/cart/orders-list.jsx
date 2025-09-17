@@ -22,16 +22,15 @@ function OrdersList() {
     const navigate = useNavigate();
     const access = Cookies.get('access');
 
-   console.log(cart)
     return (
         <>
-        <div className={!access ? 'flex justify-between items-center' : 'hidden'}>
+        <div className={`hidden ${!access ? 'max-[480px]:flex justify-between items-center' : ''}`}>
             <Title className={`text-gray-400`}>تحتاج إلى التسجيل للاستمرار في الشراء</Title>
 
             <button onClick={() => navigate('/login')} className='text-BgCustom'>تسجیل</button>
         </div>
 
-        <hr className={!access ? 'w-[95%] m-auto my-11' : 'hidden'}/>
+        <hr className={`hidden ${!access ? 'max-[480px]:flex w-[95%] m-auto my-11' : ''}`}/>
 
         {/* address */}
         {access ? (

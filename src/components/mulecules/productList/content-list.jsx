@@ -6,10 +6,13 @@ import useGetSubCategory from '../../../hooks/use-get-sub-category';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useCart } from '../../../context/CartContext';
+import NotData from '../../../assets/image/undraw_no-data_ig65.svg'
+
+
 
 function ContentList({ search }) {
     const {data} = useGetSubCategory();
-    console.log(data)
+    // console.log(data)
     const { cart, addToCart } = useCart();
     // console.log(data)
     const filtered = data?.results?.filter(item =>
@@ -27,36 +30,42 @@ function ContentList({ search }) {
         toast.success('تمت الإضافة إلى سلة التسوق');
     }
     return (
-        <div className='mt-4 grid border grid-cols-4 max-[1200px]:grid-cols-3 max-[860px]:grid-cols-2  gap-[18px] '>
-            {filtered?.map((item) => (
-                <CardShopProduct
-                    // width="200px"
-                    onTapCard={() => handleCardClick(item?.id)}
-                    paddingCard="10px"
-                    borderCard="2px solid #E6E6E6"
-                    borderRadiusCard={8}
-                    colorCard="white"
-                    borderRadiusImg="8px"
-                    imageCard={item?.image}
-                    boxFitCard="contain"
-                    product={item?.om_name}
-                    price={`${item?.price} ريال`}
-                    priceOffer={`${item?.discounted_price} ريال`}
-                    style={{ fontSize: 16, color: "#333" }}
-                    stylePrice={{ fontWeight: "bold", color: "black" }}
-                    styleOffer={{ fontSize: 14 }}
-                    avatarButtonConfigCardShopProduct={{
-                        onTap: () => handleGetData(item),
-                        width: 40,
-                        height: 40,
-                        border: "1px solid transparent",
-                        borderRadius: "16px",
-                        icon: <img src={IconCardShopProduct} alt="" srcset="" />,
-                        // colorIcon: "black",
-                        sizeIcon: 20,
-                    }}
-                />
-            ))}
+        <div>
+            <div className='mt-4 grid border grid-cols-4 max-[1200px]:grid-cols-3 max-[860px]:grid-cols-2  gap-[18px] '>
+                {filtered?.map((item) => (
+                    <CardShopProduct
+                        // width="200px"
+                        onTapCard={() => handleCardClick(item?.id)}
+                        paddingCard="10px"
+                        borderCard="2px solid #E6E6E6"
+                        borderRadiusCard={8}
+                        colorCard="white"
+                        borderRadiusImg="8px"
+                        imageCard={item?.image}
+                        boxFitCard="contain"
+                        product={item?.om_name}
+                        price={`${item?.price} ريال`}
+                        priceOffer={`${item?.discounted_price} ريال`}
+                        style={{ fontSize: 16, color: "#333" }}
+                        stylePrice={{ fontWeight: "bold", color: "black" }}
+                        styleOffer={{ fontSize: 14 }}
+                        avatarButtonConfigCardShopProduct={{
+                            onTap: () => handleGetData(item),
+                            width: 40,
+                            height: 40,
+                            border: "1px solid transparent",
+                            borderRadius: "16px",
+                            icon: <img src={IconCardShopProduct} alt="" srcset="" />,
+                            // colorIcon: "black",
+                            sizeIcon: 20,
+                        }}
+                    />
+                ))}
+            </div>
+
+            <div className='flex justify-center mt-[100px] items-center'>
+                <img src={NotData} className='w-[150px]' alt="" />
+            </div>
         </div>
     )
 }

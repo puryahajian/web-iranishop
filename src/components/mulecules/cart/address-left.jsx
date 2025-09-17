@@ -59,7 +59,7 @@ function AddressLeft() {
                         placeholder={`أدخل رمز الخصم`} 
                         className={`bg-transparent w-full pr-2`}
                         value={code} 
-                        onChange={(e) => setCode(e.target.value.toUpperCase())}
+                        onChange={(e) => setCode(e.target.value)}
                     />
 
                     <Button

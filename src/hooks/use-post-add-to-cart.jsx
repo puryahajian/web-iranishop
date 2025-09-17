@@ -6,13 +6,13 @@ function usePostAddToCart() {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({ result }) => {
-            // console.log(itemId)
+        mutationFn: async ({ result, discountCode }) => {
+            // console.log(result)
             const data = JSON.stringify({
                 delivery_method : 1,
                 payment_method: 1,
                 items: result,
-                discount_code: ""
+                discount_code: discountCode
             });
             // console.log(data)
             
@@ -23,8 +23,8 @@ function usePostAddToCart() {
             return response.data;
         },
         onSuccess: (data) => {
-            // console.log(data)
-            queryClient.removeQueries('getCart');
+            console.log(data)
+            // localStorage.removeItem('cart');
         },
         onError: (error) => {
             // console.log(error)

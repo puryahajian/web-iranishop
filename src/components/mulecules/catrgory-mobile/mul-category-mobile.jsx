@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import TempHeader from '../../template/temp-header'
+import React, { useState, useEffect, useMemo } from 'react';
+import TempHeader from '../../template/temp-header';
 import useGetCategory from '../../../hooks/use-get-category';
 import useGetParentCategory from '../../../hooks/use-get-parent-category';
 import ItemCategory from './item-category';
@@ -7,47 +7,80 @@ import InputSelector from '../input-selector';
 
 function MulCategoryMobile() {
     const [selectedParentId, setSelectedParentId] = useState('');
-    const [page, setPage] = useState(1);
-    const {data: parentCategories} = useGetCategory(); // برای دسته‌بندی‌های اصلی
-    const {data: subCategories} = useGetParentCategory(selectedParentId, page); // برای زیردسته‌ها
-    console.log(subCategories)
-    const mainCategoriesOrder = parentCategories?.filter(item => item?.order !== 0);
-    console.log(mainCategoriesOrder)
+    const [selectedSubCategoryId, setSelectedSubCategoryId] = useState('');
+    const [subCategories, setSubCategories] = useState([]);
 
+    // دریافت دسته‌های اصلی
+    const { data: parentCategories } = useGetCategory();
+
+    // دریافت زیردسته‌های دسته اصلی و زیردسته‌ها
+    const { data: parentSubCategories } = useGetParentCategory(selectedParentId);
+    const { data: subSubCategories } = useGetParentCategory(selectedSubCategoryId);
+
+    // ترکیب زیردسته‌ها با اولویت دسته اصلی
+    useEffect(() => {
+        let combined = [];
+        if (parentSubCategories?.results) combined = [...parentSubCategories.results];
+        if (subSubCategories?.results) combined = [...combined, ...subSubCategories.results];
+        setSubCategories(combined);
+    }, [parentSubCategories, subSubCategories]);
+
+    // دسته‌های اصلی مرتب و بدون order صفر
+    const mainCategoriesOrder = useMemo(
+        () => parentCategories?.filter(item => item?.order !== 0) || [],
+        [parentCategories]
+    );
+
+    // انتخاب دسته اصلی
     const handleParentChange = (e) => {
         const selectedId = e.target.value;
         setSelectedParentId(selectedId);
-        setPage(1); // هر بار که دسته اصلی تغییر می‌کند، صفحه را ریست می‌کنیم
-    }
+        setSelectedSubCategoryId(''); // ریست انتخاب زیردسته
+    };
+
+    // انتخاب زیردسته
+    const handleSubCategoryChange = (e) => {
+        setSelectedSubCategoryId(e.target.value);
+    };
 
     return (
         <div>
-            <TempHeader/>
-            <div className='fixed top-[60px] h-max right-0 w-full pb-4 bg-white'>
+            <TempHeader />
+
+            <div className="fixed top-[60px] right-0 w-full pb-4 bg-white h-max">
                 <InputSelector
-                    itemOne={`دسته بندی اصلی مورد نظر خود را انتخاب کنید`}
-                    onChange={handleParentChange}
+                    itemOne="دسته بندی اصلی مورد نظر خود را انتخاب کنید"
                     value={selectedParentId}
+                    onChange={handleParentChange}
                 >
-                    {/* <option value="">دسته بندی اصلی مورد نظر خود را انتخاب کنید</option> */}
-                    {mainCategoriesOrder?.map((item) => (
-                        <option key={item.id} value={item.id}>{item.om_name}</option>
+                    {mainCategoriesOrder.map(item => (
+                        <option key={item.id} value={item.id}>
+                            {item.om_name}
+                        </option>
                     ))}
                 </InputSelector>
+
                 <InputSelector
-                    className={`mt-4`}
-                    itemOne={`زیر دسته بندی مورد نظر خود را انتخاب کنید`}
-                    disabled={!selectedParentId}
+                    className="mt-4"
+                    itemOne="زیر دسته بندی مورد نظر خود را انتخاب کنید"
+                    value={selectedSubCategoryId}
+                    onChange={handleSubCategoryChange}
+                    disabled={!subCategories.length}
                 >
-                    {/* <option value="">انتخاب کنید</option> */}
-                    {subCategories?.results?.map((item) => (
-                        <option key={item.id} value={item.id}>{item.om_name}</option>
+                    {subCategories.map(item => (
+                        <option key={item.id} value={item.id}>
+                            {item.om_name}
+                        </option>
                     ))}
                 </InputSelector>
             </div>
-            <ItemCategory/>
+
+            <ItemCategory
+                subCategories={subCategories}
+                mainCategoriesOrder={mainCategoriesOrder}
+            />
         </div>
-    )
+    );
 }
 
-export default MulCategoryMobile
+export default MulCategoryMobile;
