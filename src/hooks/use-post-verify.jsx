@@ -21,7 +21,7 @@ function usePostVerify() {
         },
         onSuccess: (data) => {
             const access = data.access;
-            console.log(access)
+            // console.log(access)
             const refresh = data.refresh;
 
             Cookies.set("access", access, { expires: 365 });

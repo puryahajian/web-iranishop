@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useGetProduct from '../../../hooks/use-get-product';
 import { CardShopProduct } from '../card-shop-product';
 import IconCardShopProduct from '../../../assets/image/plus.png';
@@ -7,7 +7,7 @@ import ResponseIcon from '../../../assets/image/undraw_searching_no1g.svg'
 import ContentResponseSearch from './content-response-search';
 
 function ContentResponsSearch({ search }) {
-    const navigate = useNavigate();
+    const navigate = useNavigate();    
     const { data, isLoading, isError } = useGetProduct(search);
     const handleCardClick = (id) => {
         // e.preventDefault();
@@ -28,7 +28,7 @@ function ContentResponsSearch({ search }) {
     }
 
     if (!data || data?.results?.length === 0) {
-        return <p className="text-center mt-12">لم يتم العثور على المنتج</p>;
+        return <div className='w-full mt-11 flex justify-center'><img src={ResponseIcon} className='w-[200px]' alt="" srcset="" /></div>;
     }
 
 

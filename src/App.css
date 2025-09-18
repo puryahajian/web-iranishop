@@ -15,6 +15,9 @@ body{
   margin: 0;
 
 }
+/* .index{
+  z-index: 20;
+} */
 
 .loader {
   width: 20px;

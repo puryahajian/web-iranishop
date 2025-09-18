@@ -73,7 +73,7 @@ function OrdersList() {
                     <CardShopProductWallet2
                         onClick={() => navigate(`/product-detail/${item?.data?.data?.id ?? item?.data?.id}`)}
                         imageCard={item?.data?.data?.image ?? item?.data?.image}
-                        product={item?.data?.data?.name ?? item?.data?.om_name}
+                        product={item?.data?.data?.om_name ?? item?.data?.om_name}
                         price={`${item?.data?.discounted_price !== null ? item?.data?.discounted_price.toLocaleString('fa-IR') : item?.data?.price.toLocaleString('fa-IR')}`}
                         numberProduct={item?.quantity}
                         check={true}

@@ -23,7 +23,7 @@ function usePostAddToCart() {
             return response.data;
         },
         onSuccess: (data) => {
-            console.log(data)
+            // console.log(data)
             // localStorage.removeItem('cart');
         },
         onError: (error) => {

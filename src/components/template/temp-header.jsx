@@ -17,6 +17,7 @@ import IconArrow from '../../assets/image/Iconly/Iconly/Bold/Iconly/Bold/Arrow -
 import BagWhite from '../../assets/image/Iconly/Iconly/Bold/Iconly/Bold/Bag-white.png'
 import { useLayoutEffect } from 'react'
 import { useRef } from 'react'
+import '../../App.css'
 import Cookies from "js-cookie";
 import DropDownMenu from '../mulecules/drop-down-menu'
 
@@ -27,42 +28,11 @@ function TempHeader({ setModalLogOut }) {
     const { cart } = useCart();
     const [shadowSearch, setShowSearch] = useState(false);
     const navigate = useNavigate();
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState(null);
     const boxRef = useRef(null);
     const accessToken = Cookies.get('access');
     const location = useLocation();
-    const [showBottomHeader, setShowBottomHeader] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-    const bottomHeaderRef = useRef(null);
-    const [bottomHeaderHeight, setBottomHeaderHeight] = useState(0);
-    const [scrolled, setScrolled] = useState(false);
-    const [isMobile480, setIsMobile480] = useState(false);
 
-    // useLayoutEffect(() => {
-    //     const measure = () => {
-    //         if (bottomHeaderRef.current) {
-    //             setBottomHeaderHeight(bottomHeaderRef.current.offsetHeight || 0);
-    //         }
-    //     };
-    //     measure();
-    //     window.addEventListener('resize', measure, { passive: true });
-    //     return () => window.removeEventListener('resize', measure);
-    // }, []);
-
-    // useEffect(() => {
-    //     function handleScroll() {
-    //         const currentY = window.scrollY || 0;
-    //         if (currentY > lastScrollY && currentY > 50) {
-    //             setShowBottomHeader(false);
-    //         } else {
-    //             setShowBottomHeader(true);
-    //         }
-    //         setLastScrollY(currentY);
-    //     }
-
-    //     window.addEventListener('scroll', handleScroll, { passive: true });
-    //     return () => window.removeEventListener('scroll', handleScroll);
-    // }, [lastScrollY]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -158,10 +128,10 @@ function TempHeader({ setModalLogOut }) {
 
                                 {/* Popup جستجو */}
                                 {shadowSearch && (
-                                <div className="z-20">
+                                <div>
                                     {/* بک‌دراپ */}
                                     <div
-                                    className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[1]"
+                                    className="fixed inset-0 bg-black/40 backdrop-blur-sm index"
                                     onClick={() => setShowSearch(false)}
                                     ></div>
 
@@ -214,7 +184,7 @@ function TempHeader({ setModalLogOut }) {
                             />
                         )}
 
-                        <Link to='/cart' className="relative">
+                        <Link to='/cart' className="relative ">
                             <AvatarButtonHeader
                                 src={BagWhite}
                                 className="flex items-center w-max rounded-[8px] font-bold !bg-BgCustom"

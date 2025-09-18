@@ -9,12 +9,13 @@ import AvatarButtonHeader from '../avatar-button-header'
 import Text from '../../atoms/text'
 import Loc from '../../../assets/image/Iconly/location-pin.png'
 import useGetOption from '../../../hooks/use-get-option'
+import Button from '../../atoms/button'
 
 
 function MulAboutUs() {
     const {data} = useGetOption();
     const getData =  data?.results[0];
-    
+    // console.log(getData)
     return (
         <div>
             <TempHeader/>
@@ -94,6 +95,14 @@ function MulAboutUs() {
                                 </div>
                             </li>
                         </ul>
+                    </div>
+
+                    <div className='fixed bottom-0 right-0 w-full px-4 '>
+                        <a href={`tel:+${getData?.support_phone}`}>
+                            <Button className={`w-full mb-4 py-2`}>
+                                اتصل بالدعم
+                            </Button>
+                        </a>
                     </div>
                 </TempBoxWhite>
                 <TempFooter/>

@@ -20,7 +20,7 @@ function ContentSearch({ setSearch }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-        //   handleGetValue();
+          handleGetValue();
         }}
       >
         <div className="flex items-center relative w-full m-auto gap-3 border-b border-gray-400">
@@ -42,7 +42,7 @@ function ContentSearch({ setSearch }) {
             value={search}
             onChange={(e) => {
                 setSearchInput(e.target.value)
-                setSearch(search);
+                setSearch(e.target.value);
             }}
             placeholder="بحث المنتج"
             classIcon={`hidden`}

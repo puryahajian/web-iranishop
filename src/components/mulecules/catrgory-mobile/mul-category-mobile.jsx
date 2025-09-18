@@ -49,7 +49,7 @@ function MulCategoryMobile() {
 
             <div className="fixed top-[60px] right-0 w-full pb-4 bg-white h-max">
                 <InputSelector
-                    itemOne="دسته بندی اصلی مورد نظر خود را انتخاب کنید"
+                    itemOne="حدد الفئة الرئيسية التي تريدها"
                     value={selectedParentId}
                     onChange={handleParentChange}
                 >
@@ -62,7 +62,7 @@ function MulCategoryMobile() {
 
                 <InputSelector
                     className="mt-4"
-                    itemOne="زیر دسته بندی مورد نظر خود را انتخاب کنید"
+                    itemOne="حدد الفئة الفرعية التي تريدها"
                     value={selectedSubCategoryId}
                     onChange={handleSubCategoryChange}
                     disabled={!subCategories.length}

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useCart } from '../../../context/CartContext';
 import NotData from '../../../assets/image/undraw_no-data_ig65.svg'
+import Text from '../../atoms/text';
 
 
 
@@ -63,8 +64,8 @@ function ContentList({ search }) {
                 ))}
             </div>
 
-            <div className='flex justify-center mt-[100px] items-center'>
-                <img src={NotData} className='w-[150px]' alt="" />
+            <div className='flex justify-center items-center max-[480px]:mt-20'>
+                <Text>{filtered?.length === 0 && 'المنتج غير متوفر'}</Text>
             </div>
         </div>
     )

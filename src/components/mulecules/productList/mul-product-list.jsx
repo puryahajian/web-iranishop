@@ -17,7 +17,11 @@ function MulProductList() {
                     <div className='grid grid-cols-4 gap-6 max-[480px]:gap-0 max-[480px]:grid-cols-1'>
                         <div>
                             <TempBoxWhite className={`!mt-0 max-[480px]:fixed max-[480px]:top-[50px] max-[480px]:px-5 max-[480px]:pb-0 max-[480px]:right-0 max-[480px]:w-full`}>
-                                <Input placeholder={'بحث'} value={search} onChange={e => setSearch(e.target.value)} />
+                                <Input 
+                                    placeholder={'بحث'} 
+                                    value={search} 
+                                    onChange={e => setSearch(e.target.value)} 
+                                />
                             </TempBoxWhite>
 
                             <TempBoxWhite className={`max-[480px]:hidden`}>

@@ -58,7 +58,7 @@ function MulProfile() {
                 addressPreview.name  
             ].filter(Boolean).join('، ');
             setAddress(addressString);
-            console.log(addressString)
+            // console.log(addressString)
         }
     }, [addressPreview]);
 
@@ -73,6 +73,7 @@ function MulProfile() {
     }, [dataProfile]);
 
     const handleSuccess = () => {
+        // console.log(location)
         mutate(
             {
                 name, address, addressLat, addressLng, family, location
@@ -82,6 +83,9 @@ function MulProfile() {
                     toast.success('تم تحديث الملف الشخصي')
                     setModalEditLocationMobile(false)
                     setModalEditMobile(false)
+                },
+                onError: (err) => {
+                    // console.log(err)
                 }
             }
         );
@@ -307,7 +311,7 @@ function MulProfile() {
                 close={() => setModalEditLocationMobile(false)}
                 isOpen={modalEditLocationMobile}
                 handleClose={() => setModalEditLocationMobile(false)}
-                onSuccess={handleSuccess}
+                onSuccess={() => handleSuccess()}
                 // Title="هل تريد الخروج؟"
                 textAccept={isPending ? <Loading/> : 'احفظ عنوانك'}
                 classCanceled={`hidden`}
